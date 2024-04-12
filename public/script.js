@@ -1,37 +1,43 @@
 // Funciones para mostrar y ocultar modales
+// Muestra el modal de inicio de sesión.
 function showLogin() {
   document.getElementById('login-pop').style.display = 'block';
 }
 
+// Oculta el modal de inicio de sesión.
 function hideLogin() {
   document.getElementById('login-pop').style.display = 'none';
 }
 
+// Muestra el modal de creación de cuenta.
 function showCreateAccount() {
   document.getElementById('create-account-pop').style.display = 'block';
 }
 
+// Oculta el modal de creación de cuenta.
 function hideCreateAccount() {
   document.getElementById('create-account-pop').style.display = 'none';
 }
-//Funcion para realizar pruebas
+
+// Función para obtener datos desde el servidor para propósitos de prueba.
 function prueba() {
   fetch('/datos')
     .then(response => response.json())
     .then(data => {
-      // Manipular los datos recibidos y actualizar la interfaz de usuario
+      // Muestra los datos recibidos en la consola para depuración.
       console.log('Datos de la base de datos:', data);
     })
     .catch(error => console.error('Error al obtener datos:', error));
 };
 
-// Función para enviar solicitud de autenticación
+// Función para enviar solicitud de autenticación al servidor.
 function autenticarUsuario(email, password) {
   const userCredentials = {
     "email": email,
     "password": password
   };
 
+  // Realiza una solicitud POST al endpoint de autenticación.
   fetch('/authenticate', { 
     method: 'POST',
     headers: {
@@ -47,14 +53,14 @@ function autenticarUsuario(email, password) {
   })
   .then(data => {
     console.log('Autenticación exitosa:', data);
-    // Redirección o manejo del token aquí
+    // Aquí se podrían agregar acciones adicionales tras una autenticación exitosa.
   })
   .catch(error => {
     console.error('Error al autenticar:', error);
   });
 }
 
-// Función para registrar una nueva cuenta
+// Función para registrar una nueva cuenta.
 function registerAccount() {
   var firstName = document.getElementById('first-name').value;
   var lastName = document.getElementById('last-name').value;
@@ -68,6 +74,7 @@ function registerAccount() {
     "password": password
   };
 
+  // Envía la información del nuevo usuario al servidor para registrarla.
   fetch('/register', {
     method: 'POST',
     headers: {
@@ -83,7 +90,7 @@ function registerAccount() {
   })
   .then(data => {
     console.log('Registro exitoso:', data);
-    hideCreateAccount(); // Cierra el modal de registro
+    hideCreateAccount(); // Cierra el modal de registro tras un registro exitoso.
   })
   .catch(error => {
     console.error('Error al registrar:', error);
@@ -91,6 +98,7 @@ function registerAccount() {
 }
 
 // Eventos de formulario
+// Previene la recarga de la página y maneja la autenticación.
 document.getElementById('login-form').addEventListener('submit', function(event) {
   event.preventDefault(); 
   var email = document.getElementById('username').value;
@@ -99,6 +107,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
   autenticarUsuario(email, password);
 });
 
+// Previene la recarga de la página y maneja el registro de cuenta.
 document.getElementById('create-account-form').addEventListener('submit', function(event) {
   event.preventDefault();
   registerAccount();
