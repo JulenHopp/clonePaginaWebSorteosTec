@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
 });
 
 // Utilizar middleware para parsear el cuerpo de las solicitudes en formato JSON
-app.use(express.json());
+app.use(express.json());//hsdfsdfds
 
 // Establecimiento de la conexión a la base de datos y manejo de errores de conexión
 connection.connect((err) => {
