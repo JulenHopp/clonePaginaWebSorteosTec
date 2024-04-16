@@ -1,0 +1,80 @@
+/* dashboard.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1B3589;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #1B3589;
+}
+
+.card {
+    background-color: #bddfff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin: 5px 0;
+}
+
+.card p {
+    margin: 0;
+}
+
+.activity ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.activity ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #1B3589;
+}
+
+footer {
+    background-color: #1B3589;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
