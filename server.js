@@ -55,7 +55,7 @@ app.post('/authenticate', (req, res) => {
   }
 
   // Consulta SQL para verificar la contraseña del usuario
-  const query = 'SELECT p.nombre, p.psswrd, p.admins FROM Usuario p WHERE p.email = ? ';
+  const query = 'SELECT nombre, psswrd, admins FROM Usuario WHERE email = ? ';
   connection.query(query, [email], (error, results) => {
       if (error) {
           console.error('Error al ejecutar la consulta:', error);
@@ -71,6 +71,7 @@ app.post('/authenticate', (req, res) => {
           // Comparación de la contraseña y manejo de la respuesta
           if (password === results[0].psswrd) {
             identityKey = results[0].email;
+            console.log(identityKey);
               res.json({ message: 'Autenticación exitosa', firstName: results[0].nombre ,admin: results[0].admins });
           } else {
               res.status(401).send('Usuario o contraseña incorrectos');
@@ -114,14 +115,14 @@ app.get('/datos', (req, res) => {
 
 // Usar identityKey para obtener el nombre y apellido del usuario
 app.get('/userData', (req, res) => {
-  const query = 'SELECT p.nombre, p.apellido FROM Usuario as p WHERE p.email = ?';
+  const query = 'SELECT * FROM Usuario WHERE email = ?';
   connection.query(query, [identityKey], (error, results) => {
     if (error) {
       console.error('Error al ejecutar la consulta:', error);
       res.status(500).send('Error interno del servidor');
       return;
     }
-    res.json(results[0]);
+    res.json(results);
   });
 });
 
