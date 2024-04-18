@@ -53,7 +53,8 @@ function autenticarUsuario(email, password) {
   })
   .then(data => {
     console.log('Autenticación exitosa:', data);
-    // Aquí se podrían agregar acciones adicionales tras una autenticación exitosa.
+    const usuarioElement = document.getElementById('usuario');
+    usuarioElement.innerText = `Bienvenido, ${firstName}`;
   })
   .catch(error => {
     console.error('Error al autenticar:', error);
@@ -68,14 +69,16 @@ function registerAccount() {
   var password = document.getElementById('new-password').value;
 
   const newUser = {
-    "firstName": firstName,
-    "lastName": lastName,
+    "nombre": firstName,
+    "apellido": lastName,
     "email": email,
-    "password": password
+    "psswrd": password,
+    "admins": 0,
+    "id_estado": 1// cambiar para que se ponga el estado posteriormente
   };
 
   // Envía la información del nuevo usuario al servidor para registrarla.
-  fetch('/register', {
+  fetch('/Crear-cuenta', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -89,11 +92,9 @@ function registerAccount() {
     return response.json();
   })
   .then(data => {
-    console.log('Registro exitoso:', data.admin);
-    if(data.admin === 1){
-      console.log("entro")
-      window.location.href = 'localhost:3000/admin.html';
-    }
+    console.log('Registro exitoso:');
+    const usuarioElement = document.getElementById('usuario');
+        usuarioElement.innerText = `Bienvenido, ${firstName}`;
     hideCreateAccount(); // Cierra el modal de registro tras un registro exitoso.
   })
   .catch(error => {
@@ -116,4 +117,3 @@ document.getElementById('create-account-form').addEventListener('submit', functi
   event.preventDefault();
   registerAccount();
 });
-

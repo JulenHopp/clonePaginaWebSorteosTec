@@ -76,52 +76,21 @@ app.post('/authenticate', (req, res) => {
   
 });
 
-// Endpoint POST para registrar una nueva cuenta, incluyendo nombre, apellido, email y contraseña
-app.post('/register', (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+app.post('/Crear-cuenta', (req, res) => {
+  // Extraer los datos de la solicitud
+  const { nombre, apellido, email, psswrd, admins, id_estado } = req.body;
 
-  // Verificación de completitud de los campos requeridos
-  if (!firstName || !lastName || !email || !password) {
-    return res.status(400).send('Todos los campos son requeridos.');
-  }
+  console.log("entro 1")
 
-  // Transacción SQL para asegurar la consistencia en la creación de cuentas
-  connection.beginTransaction(err => {
-    if (err) return res.status(500).send('Error al iniciar la transacción');
-
-    // Inserción del usuario en la tabla Usuario
-    const insertUserQuery = 'INSERT INTO Usuario (email, nombre, apellido) VALUES (?, ?, ?)';
-    connection.query(insertUserQuery, [email, firstName, lastName], (error, results) => {
+  // Llamar al procedimiento almacenado en la base de datos
+  connection.query('CALL Crear_cuenta(?, ?, ?, ?, ?, ?)', [nombre, apellido, email, psswrd, admins, id_estado], (error, results, fields) => {
+    console.log("entro")
       if (error) {
-        return connection.rollback(() => {
-          console.error('Error al insertar en Usuario:', error);
-          res.status(500).send('Error al registrar el usuario');
-        });
+          console.error('Error al ejecutar el procedimiento almacenado:', error);
+          return res.status(500).json({ error: 'Error interno del servidor' });
       }
-
-      // Inserción de la contraseña en texto plano en la tabla PasswordUsuarios
-      const insertPasswordQuery = 'INSERT INTO PasswordUsuarios (email_user, psswrd) VALUES (?, ?)';
-      connection.query(insertPasswordQuery, [email, password], (error) => {
-        if (error) {
-          return connection.rollback(() => {
-            console.error('Error al insertar en PasswordUsuarios:', error);
-            res.status(500).send('Error al registrar la contraseña');
-          });
-        }
-
-        // Finalización de la transacción
-        connection.commit(err => {
-          if (err) {
-            return connection.rollback(() => {
-              console.error('Error al hacer commit de la transacción:', err);
-              res.status(500).send('Error al completar el registro');
-            });
-          }
-          console.log("Registro completo.");
-          res.json({ message: 'Registro exitoso' });
-        });
-      });
-    });
+      console.log('Cuenta creada exitosamente');
+      res.status(200).json({ message: 'Cuenta creada exitosamente' });
   });
 });
 
