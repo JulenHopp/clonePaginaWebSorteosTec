@@ -106,3 +106,24 @@ function openUserProfile() {
   // Aquí puedes agregar cualquier lógica previa necesaria antes de mostrar el modal
   document.getElementById('user-options-modal').style.display = 'block';  // Muestra el modal de opciones del usuario
 }
+
+
+function editAccount() {
+  // Esta función podría redirigir al usuario a una página de edición de perfil o mostrar un formulario de edición en un modal
+  console.log('Editar cuenta');
+  // Por ejemplo, puedes abrir otro modal para editar la cuenta:
+  document.getElementById('edit-account-modal').style.display = 'block';
+  hideUserOptions();  // Opcional: ocultar el modal de opciones del usuario
+}
+
+function logout() {
+  // Función para manejar el cierre de sesión del usuario
+  console.log('Cerrar sesión');
+  // Aquí implementarías la lógica para cerrar la sesión, como limpiar cookies o localStorage
+  window.location.href = '/';  // Redireccionar al usuario a la página de inicio de sesión
+  hideUserOptions();  // Ocultar el modal de opciones del usuario
+}
+
+function hideUserOptions() {
+  document.getElementById('user-options-modal').style.display = 'none';  // Oculta el modal de opciones del usuario
+}

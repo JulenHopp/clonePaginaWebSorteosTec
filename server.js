@@ -63,8 +63,6 @@ app.post('/authenticate', (req, res) => {
           return;
       }
       console.log("entro 1");
-      console.log(password);
-      console.log(results[0].psswrd)
       // Check if results exist and have at least one row
       if (results && results.length > 0) {
         console.log("entro 2");
