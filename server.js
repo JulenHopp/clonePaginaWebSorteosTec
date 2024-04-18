@@ -101,18 +101,6 @@ app.post('/Crear-cuenta', (req, res) => {
   });
 });
 
-// Endpoint GET para obtener todos los registros de la tabla PasswordUsuarios
-app.get('/datos', (req, res) => {
-  connection.query('SELECT * FROM PasswordUsuarios', (error, results, fields) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).send('Error al obtener los datos');
-      return;
-    }
-    res.json(results);
-  });
-});
-
 // Usar identityKey para obtener el nombre y apellido del usuario
 app.get('/userData', (req, res) => {
   const query = 'SELECT * FROM Usuario WHERE email = ?';
