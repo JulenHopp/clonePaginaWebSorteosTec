@@ -43,11 +43,11 @@ h1 {
     padding: 5px; 
     margin: 20px;
     margin-bottom: 10px;
-    /*border-radius: 5px; */
-    /*border: 2px solid #1B3589;*/
-    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    border-radius: 5px; 
+     border: 2px solid #1B3589; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     position: relative;
-    /*box-sizing: border-box;*/
+    box-sizing: border-box;
 }
 
 .card img {
@@ -58,7 +58,7 @@ h1 {
 }
 
 .card:before {
-    content: '';
+    content: attr(data-content);
     position: absolute;
     top: -20px;
     left: 0;
@@ -68,6 +68,12 @@ h1 {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 2px solid #1B3589; /* Border color */
+}
+.card[data-content="Borrego Tower"]:before {
+    background-color: #F8F8F8; /* Example styling for Game 1 background color */
+    color: #1B3589; /* Example styling for Game 1 text color */
+   right: 25px;
+    font-weight: bold;
 }
 
 .card h2 {
@@ -82,6 +88,18 @@ h1 {
     overflow: hidden; /* Hide any text overflow */
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
+}
+.description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1B3589;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 /* Footer */
 .footer {

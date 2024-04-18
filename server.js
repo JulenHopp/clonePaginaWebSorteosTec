@@ -52,21 +52,28 @@ app.post('/authenticate', (req, res) => {
   }
 
   // Consulta SQL para verificar la contraseña del usuario
-  const query = 'SELECT p.psswrd FROM PasswordUsuarios p WHERE p.email_user = ?';
+  const query = 'SELECT p.psswrd, p.admins FROM Usuario p WHERE p.email = ? ';
   connection.query(query, [email], (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).send('Error interno del servidor');
-      return;
-    }
-
-    // Comparación de la contraseña y manejo de la respuesta
-    if (results.length > 0 && password === results[0].psswrd) {
-      res.json({ message: 'Autenticación exitosa' });
-    } else {
-      res.status(401).send('Usuario o contraseña incorrectos');
-    }
+      if (error) {
+          console.error('Error al ejecutar la consulta:', error);
+          res.status(500).send('Error interno del servidor');
+          return;
+      }
+      console.log("entro 1")
+      // Check if results exist and have at least one row
+      if (results && results.length > 0) {
+        console.log("entro 2")
+          // Comparación de la contraseña y manejo de la respuesta
+          if (password === results[0].psswrd) {
+              res.json({ message: 'Autenticación exitosa', admin: results[0].admins });
+          } else {
+              res.status(401).send('Usuario o contraseña incorrectos');
+          }
+      } else {
+          res.status(401).send('Usuario no encontrado');
+      }
   });
+  
 });
 
 // Endpoint POST para registrar una nueva cuenta, incluyendo nombre, apellido, email y contraseña

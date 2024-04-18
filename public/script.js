@@ -89,7 +89,11 @@ function registerAccount() {
     return response.json();
   })
   .then(data => {
-    console.log('Registro exitoso:', data);
+    console.log('Registro exitoso:', data.admin);
+    if(data.admin === 1){
+      console.log("entro")
+      window.location.href = 'localhost:3000/admin.html';
+    }
     hideCreateAccount(); // Cierra el modal de registro tras un registro exitoso.
   })
   .catch(error => {
@@ -112,3 +116,4 @@ document.getElementById('create-account-form').addEventListener('submit', functi
   event.preventDefault();
   registerAccount();
 });
+
