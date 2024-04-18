@@ -52,20 +52,22 @@ app.post('/authenticate', (req, res) => {
   }
 
   // Consulta SQL para verificar la contraseña del usuario
-  const query = 'SELECT p.psswrd, p.admins FROM Usuario p WHERE p.email = ? ';
+  const query = 'SELECT p.nombre, p.psswrd, p.admins FROM Usuario p WHERE p.email = ? ';
   connection.query(query, [email], (error, results) => {
       if (error) {
           console.error('Error al ejecutar la consulta:', error);
           res.status(500).send('Error interno del servidor');
           return;
       }
-      console.log("entro 1")
+      console.log("entro 1");
+      console.log(password);
+      console.log(results[0].psswrd)
       // Check if results exist and have at least one row
       if (results && results.length > 0) {
-        console.log("entro 2")
+        console.log("entro 2");
           // Comparación de la contraseña y manejo de la respuesta
           if (password === results[0].psswrd) {
-              res.json({ message: 'Autenticación exitosa', admin: results[0].admins });
+              res.json({ message: 'Autenticación exitosa', firstName: results[0].nombre ,admin: results[0].admins });
           } else {
               res.status(401).send('Usuario o contraseña incorrectos');
           }

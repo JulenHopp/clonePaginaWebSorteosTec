@@ -29,47 +29,53 @@
                     <li><a href="games.html">Juegos</a></li>
                 </ul>
             </nav>
-            <div>
-                <button id="usuario" onclick= "showLogin()">
+            <!-- Botón de Inicio de Sesión y Perfil -->
+            <div id="auth-container">
+                <button id="login-btn" onclick="showLogin()">
                     <img src="images\perfil.svg" alt="Imagen iniciar sección" >
-                    INICIAR SESIÓN
-                </button>   
+                    Iniciar Sesión
+                </button>
             </div>
-            
-            <div id="login-pop" class="login-container">
-                <h2>Login</h2>
-                <form action="" id="login-form" >
-                  <label for="username">email</label>
-                  <input type="text" id="username" name="username" placeholder="Enter your username">
-              
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password" placeholder="Enter your password">
-                
-                  <button type="submit">Login</button>
-                  <button onclick="showCreateAccount()">Crear cuenta</button>
-                  <button onclick="hideLogin()">Cerrar</button>
+
+            <!-- Modal de Inicio de Sesión -->
+            <div id="login-modal" class="modal" style="display:none;">
+                <form onsubmit="login(event)">
+                    <h2>Iniciar Sesión</h2>
+                    <label for="login-username">Usuario:</label>
+                    <input type="text" id="login-username" required>
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showRegister()">Crear Cuenta</button>
+                    <button type="button" onclick="hideLogin()">Cerrar</button>
                 </form>
             </div>
 
-            <!-- Modal para crear cuenta -->
-            <div id="create-account-pop" class="login-container" style="display: none;">
-                <h2>Crear Cuenta</h2>
-                <form action="" id="create-account-form">
-                    <label for="first-name">Nombre</label>
-                    <input type="text" id="first-name" name="first-name" placeholder="Ingrese su nombre">
-                    
-                    <label for="last-name">Apellidos</label>
-                    <input type="text" id="last-name" name="last-name" placeholder="Ingrese sus apellidos">
-
-                    <label for="new-email">Email</label>
-                    <input type="text" id="new-email" name="new-email" placeholder="Ingrese su email">
-                    
-                    <label for="new-password">Contraseña</label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Ingrese su contraseña">
-                    
-                    <button type="button" onclick="registerAccount()">Registrar</button>
+            <!-- Modal de Creación de Cuenta -->
+            <div id="register-modal" class="modal" style="display:none;">
+                <form onsubmit="register(event)">
+                    <h2>Crear Cuenta</h2>
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" required>
+                    <label for="last-name">Apellidos:</label>
+                    <input type="text" id="last-name" required>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Contraseña:</label>
+                    <input type="password" id="register-password" required>
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="hideRegister()">Cerrar</button>
                 </form>
-                <button onclick="hideCreateAccount()">Cerrar</button>
+            </div>
+
+            <!-- Modal de Opciones del Usuario -->
+            <div id="user-options-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Opciones del Usuario</h2>
+                    <button type="button" onclick="editAccount()">Editar Cuenta</button>
+                    <button type="button" onclick="logout()">Cerrar Sesión</button>
+                    <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
             </div>
         </div>
     </header>
