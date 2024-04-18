@@ -55,7 +55,7 @@ app.post('/authenticate', (req, res) => {
   }
 
   // Consulta SQL para verificar la contraseña del usuario
-  const query = 'SELECT nombre, psswrd, admins FROM Usuario WHERE email = ? ';
+  const query = 'SELECT * FROM Usuario WHERE email = ? ';
   connection.query(query, [email], (error, results) => {
       if (error) {
           console.error('Error al ejecutar la consulta:', error);
