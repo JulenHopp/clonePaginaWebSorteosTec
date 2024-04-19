@@ -31,7 +31,7 @@
 <div id="addPaymentModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="addPaymentForm" onsubmit= "insertarMetodo(event)">
+        <form id="addPaymentForm" onsubmit= "insertarMetodoDatos(event)">
             <h2>Añadir Método de Pago</h2>
             <label for="paymentMethodType">Tipo de Método de Pago:</label>
             <select id="paymentMethodType">
@@ -40,9 +40,9 @@
             </select>
             <label for="Selectnombre">Nombre del Método:</label>
             <select id="nombre">
-                <option value="paypal">Paypal</option>
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
+                <option value="PayPal">Paypal</option>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
             </select>
             <label for="numero_tarjeta">Número:</label>
             <input type="text" id="numero_tarjeta">
@@ -63,8 +63,6 @@
             </select>
             <label for="paymentMethodExpirationYear">Año de Expiración:</label>
             <select id="paymentMethodExpirationYear">
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
                 <option value="2026">2026</option>

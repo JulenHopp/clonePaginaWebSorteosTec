@@ -4,7 +4,6 @@ fetch('/userData')
     .then(data => {
         document.getElementById('nombre').textContent = data[0].nombre;
         document.getElementById('apellido').textContent = data[0].apellido;
-        console.log("info en string");
         console.log('Datos del usuario:', data);
     })
     .catch(error => console.error('Error al obtener los datos del usuario:', error));
@@ -67,16 +66,22 @@ function openPaymentModal() {
     }
 }
 // Función para guardar métodos de pago
-function insertarMetodo(event) {
+function insertarMetodoDatos(event) {
     console.log("entro a insertar metodo");
-    var nombre = document.getElementById('Selectnombre').value;
-    var numero_tarjeta = document.getElementById('numero_tarjeta').value;
+    //var nombre = document.getElementById('nombre').value;
+    var nombre = event.target.querySelector('#nombre').value;
+    var numero_tarjeta = event.target.querySelector('#numero_tarjeta').value;
+    console.log(nombre);
+    //var numero_tarjeta = document.getElementById('numero_tarjeta').value;
+    console.log(numero_tarjeta);
+    insertarMetodo(nombre, numero_tarjeta);
+}
 
+function insertarMetodo(nombre, numero_tarjeta) {
     const metodoPago = {
-        "nombre": nombre,
-        "numero_tarjeta": numero_tarjeta
+        nombre: nombre,
+        numero_tarjeta: numero_tarjeta
     };
-
     fetch('/insertarMetodoPago', {
         method: 'POST',
         headers: {
@@ -84,6 +89,8 @@ function insertarMetodo(event) {
         },
         body: JSON.stringify(metodoPago)
     })
+    console.log("paso el fetch")
+    
     .then(response => {
         if (!response.ok) {
             throw new Error('Error al insertar el método de pago');
@@ -91,8 +98,7 @@ function insertarMetodo(event) {
         return response.json();
     })
     .then(data => {
-        console.log('Método de pago insertado exitosamente:', data);
-        // Aquí puedes realizar alguna acción adicional si lo deseas, como actualizar la interfaz de usuario
+        console.log('Método de pago insertado exitosamente:', metodoPago);
     })
     .catch(error => {
         console.error('Error al insertar el método de pago:', error);

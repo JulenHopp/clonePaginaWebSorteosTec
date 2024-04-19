@@ -68,7 +68,6 @@ app.post('/authenticate', (req, res) => {
           // Comparación de la contraseña y manejo de la respuesta
           if (password === results[0].psswrd) {
             identityKey = results[0].email;
-            console.log(identityKey);
               res.json({ message: 'Autenticación exitosa', firstName: results[0].nombre ,admin: results[0].admins });
           } else {
               res.status(401).send('Usuario o contraseña incorrectos');
@@ -93,7 +92,6 @@ app.post('/Crear-cuenta', (req, res) => {
       return res.status(500).json({ error: 'Error interno del servidor' });
     }
     identityKey = email;
-    console.log('Cuenta creada exitosamente');
     res.status(200).json({ message: 'Cuenta creada exitosamente' });
   });
 });
@@ -101,7 +99,6 @@ app.post('/Crear-cuenta', (req, res) => {
 // Usar identityKey para obtener el nombre y apellido del usuario
 app.get('/userData', (req, res) => {
   const query = 'SELECT * FROM Usuario WHERE email = ?';
-  console.log(identityKey)
   connection.query(query, [identityKey], (error, results) => {
     if (error) {
       console.error('Error al ejecutar la consulta:', error);
@@ -123,12 +120,10 @@ app.get('/saldo', (req, res) => {
     }
 
     if (checkResults.length === 0) {
-      // If user doesn't exist, return error
       return res.status(404).send('Usuario no encontrado');
     }
     const userId = checkResults[0].id_usuario;
-    console.log(userId);
-    // Check if eWallet exists for the user
+    
     const eWalletQuery = 'SELECT saldo FROM eWallet WHERE id_usuario = ?';
     connection.query(eWalletQuery, [userId], (eWalletError, eWalletResults) => {
       if (eWalletError) {
@@ -153,12 +148,10 @@ app.get('/paymentMethods', (req, res) => {
       console.error('Error al verificar la existencia de la eWallet:', checkError);
       return res.status(500).send('Error interno del servidor');
     }
-
     if (checkResults.length === 0) {
       // If user doesn't exist, return error
       return res.status(404).send('Usuario no encontrado');
     }
-    console.log(checkResults);
     const id_usuario = checkResults[0].id_usuario;
     // Consulta para obtener los métodos de pago asociados con la eWallet del usuario
     const idwalletQuery = 'SELECT id_wallet FROM eWallet WHERE id_usuario = ?';
@@ -168,7 +161,6 @@ app.get('/paymentMethods', (req, res) => {
         console.error('Error al obtener los métodos de pago:', errorWallet);
         return res.status(500).send('Error interno del servidor');
       }
-      console.log(walletResults);
       const idwallet = walletResults[0].id_wallet;
 
       // Consulta corregida para obtener los métodos de pago
@@ -178,9 +170,6 @@ app.get('/paymentMethods', (req, res) => {
           console.error('Error al obtener los métodos de pago:', errorMethods);
           return res.status(500).send('Error interno del servidor');
         }
-
-        // Enviar los resultados al cliente
-        console.log(methodsResults);
         res.json(methodsResults);
       });
     });
@@ -189,10 +178,10 @@ app.get('/paymentMethods', (req, res) => {
 
 app.post('/insertarMetodoPago', (req, res) => {
   // Extraer los datos de la solicitud
-  const { usuario_email, nombre_metodo, numero_tarjeta } = req.body;
+  const { usuario_email, nombre, numero_tarjeta } = req.body;
 
   // Llamar al procedimiento almacenado en la base de datos
-  connection.query('CALL Insertar_metodo_pago(?, ?, ?)', [identityKey, nombre_metodo, numero_tarjeta], (error, results, fields) => {
+  connection.query('CALL Insertar_metodo_pago(?, ?, ?)', [identityKey, nombre, numero_tarjeta], (error, results, fields) => {
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       if (error.code === 'PROCEDURE_ERROR') {
@@ -201,7 +190,6 @@ app.post('/insertarMetodoPago', (req, res) => {
         return res.status(500).json({ error: 'Error interno del servidor' });
       }
     }
-    console.log('Método de pago insertado exitosamente');
     res.status(200).json({ message: 'Método de pago insertado exitosamente' });
   });
 });
