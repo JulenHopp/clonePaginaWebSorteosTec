@@ -5,35 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
     <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/games.css"> <!-- Custom CSS for future games page -->
+    <link rel="stylesheet" href="styles/games.css"> 
+    <style>
+        /* Styles for h2 */
+        h2 {
+            color: #1B3589; /* Color azul Sorteos Tec */
+            font-family: Arial, sans-serif; /* Fuente Arial */
+        }
+        h1 {
+            margin-left: 10px;
+            color: white; /* Cambiado a color blanco */
+            font-family: Arial, sans-serif; /* Fuente Arial */
+        }
+    </style>
 </head>
 <body>
     <header class="header">
-        <div class="parte-superior">
-            <a href="index.html">Home</a>
+        <div class="navbar">
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <h1>Bienvenido a tus juegos, <span id="nombre"></span> <span id="apellido"></span>!</h1>
+                    <li class="back-button"><a href="index.html">Back</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-
+    
     <main>
-        <h1>Future Games</h1>
+        <h2>Future Games</h2>
 
         <div class="cards-container">
             <div class="card" data-content="Borrego Tower">
                 <div>
                     <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
                 </div>
-                <p>Description of Game 1</p>
+                <div class="outside-container">
+                    <p class="outside"></p>
+                </div>
+                
             </div>
             
 
-            <div class="card">
-                <h2>Game 2</h2>
-                <p>Description of Game 2</p>
+            <div class="card" data-content="Borrego Tower">
+                <div>
+                    <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                </div>
+                <div class="outside-container">
+                    <p class="outside"></p>
+                </div>
+                
             </div>
 
-            <div class="card">
-                <h2>Game 3</h2>
-                <p>Description of Game 3</p>
+            <div class="card" data-content="Borrego Tower">
+                <div>
+                    <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                </div>
+                <div class="outside-container">
+                    <p class="outside"></p>
+                </div>
+                
             </div>
         </div>
     </div>

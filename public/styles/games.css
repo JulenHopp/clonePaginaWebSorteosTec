@@ -5,12 +5,6 @@
     padding: 10px 0;
 }
 
-.parte-superior {
-    margin: 0;
-    padding: 5px 0;
-    display: flex;
-    justify-content: center;
-}
 
 .parte-superior a {
     color: white;
@@ -38,17 +32,38 @@ h1 {
 
 
 .card {
-    width: calc(25% - 10px); 
-    max-width: 150px; 
-    padding: 5px; 
+    width: calc(50% - 10px); /* Ancho dos veces mayor */
+    max-width: 300px; /* Ancho máximo dos veces mayor */
+    height: auto; /* Altura automática para mantener la proporción */
+    padding: 10px; /* Ajusta el relleno según sea necesario */
     margin: 20px;
     margin-bottom: 10px;
     border-radius: 5px; 
-     border: 2px solid #1B3589; 
+    border: 2px solid #1B3589; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     position: relative;
     box-sizing: border-box;
 }
+
+.outside-container {
+    background-color: #F8F8F8; /* Color de fondo */
+    border: 2px solid #1B3589; /* Borde sólido */
+    border-radius: 5px; /* Borde redondeado */
+    padding: 10px; /* Espaciado interno */
+    margin-top: 10px; /* Margen superior */
+}
+
+.outside {
+    color: #1B3589; /* Color del texto */
+    font-size: 16px; /* Tamaño del texto */
+    position: absolute;
+    bottom: -120px; /* Ajusta esta propiedad para controlar la distancia desde el borde inferior de la tarjeta */
+    left: 10%;
+    transform: translateX(-10%);
+    color: #1B3589;
+}
+
+
 
 .card img {
     width: 100%;
@@ -61,7 +76,7 @@ h1 {
     content: attr(data-content);
     position: absolute;
     top: -20px;
-    left: 0;
+    left: -2px;
     width: 100%;
     height: 20px;
     background-color: #f8f8f8; /* Match card background */
@@ -72,8 +87,9 @@ h1 {
 .card[data-content="Borrego Tower"]:before {
     background-color: #F8F8F8; /* Example styling for Game 1 background color */
     color: #1B3589; /* Example styling for Game 1 text color */
-   right: 25px;
     font-weight: bold;
+    text-align: center;
+
 }
 
 .card h2 {
@@ -111,4 +127,52 @@ h1 {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #1B3589;
+    padding: 2px 0;
+}
+
+
+.navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-list li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar-list li.back-button {
+    float: right;
+    margin-top: -40px;
+}
+
+.navbar-list li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-list li a:hover {
+    color: #ffcc00;
+}
+
+/* Estilos para el botón "Back" */
+.back-button a {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    
+}
+
+.back-button a:hover {
+    background-color: white;
+    color: #1B3589;
+    padding: 10px 20px;
+
 }
