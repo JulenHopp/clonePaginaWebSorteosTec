@@ -62,43 +62,73 @@ function register(event) {
   var lastName = document.getElementById('last-name').value;
   var email = document.getElementById('register-email').value;
   var password = document.getElementById('register-password').value;
+  var stateId = document.getElementById('register-state').value; // Recolecta el estado
 
-  registerAccount(firstName, lastName, email, password);
+  if (!validatePassword(password)) {
+    return; // Detiene la ejecución si la contraseña no es válida
+  }
+
+  registerAccount(firstName, lastName, email, password, stateId);
+}
+
+// Función para validar la contraseña
+function validatePassword(password) {
+  var errors = [];
+  if (password.length < 8) {
+    errors.push("Tu contraseña debe tener al menos 8 caracteres.");
+  }
+  if (!/[A-Z]/.test(password)) {
+    errors.push("Tu contraseña debe contener al menos una letra mayúscula.");
+  }
+  if (!/[a-z]/.test(password)) {
+    errors.push("Tu contraseña debe contener al menos una letra minúscula.");
+  }
+  if (!/[0-9]/.test(password)) {
+    errors.push("Tu contraseña debe contener al menos un número.");
+  }
+  if (!/[^A-Za-z0-9]/.test(password)) {
+    errors.push("Tu contraseña debe contener al menos un símbolo (ej: @, !, #, etc.).");
+  }
+  if (errors.length > 0) {
+    alert(errors.join("\n"));
+    return false; // Retorna falso si hay errores
+  }
+  return true; // Retorna verdadero si la contraseña es válida
 }
 
 // Función para enviar datos de nueva cuenta al servidor
-function registerAccount(firstName, lastName, email, password) {
-const newUser = {
-  "nombre": firstName,
-  "apellido": lastName,
-  "email": email,
-  "psswrd": password,
-  "admins": 0,
-  "id_estado": 1
-};
+function registerAccount(firstName, lastName, email, password, stateId) {
+  const newUser = {
+    "nombre": firstName,
+    "apellido": lastName,
+    "email": email,
+    "psswrd": password,
+    "admins": 0,
+    "id_estado": stateId // Asegurarse de incluir el estado
+  };
 
-fetch('/Crear-cuenta', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(newUser)
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error('Error en el registro');
-  }
-  return response.json();
-})
-.then(data => {
-  console.log('Registro exitoso:', data);
-  const usuarioElement = document.getElementById('auth-container');
-  usuarioElement.innerHTML = `<button onclick="openUserProfile()"><img src="images\perfil.svg" alt="Imagen iniciar sección" > Bienvenido, ${firstName}</button>`;
-  hideRegister();  // Cierra el modal de creación de cuenta
-})
-.catch(error => {
-  console.error('Error al registrar:', error);
-});
+  fetch('/Crear-cuenta', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newUser)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error en el registro');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Registro exitoso:', data);
+    const usuarioElement = document.getElementById('auth-container');
+    usuarioElement.innerHTML = `<button onclick="openUserProfile()"><img src="images\perfil.svg" alt="Imagen iniciar sección" > Bienvenido, ${firstName}</button>`;
+    hideRegister();  // Cierra el modal de creación de cuenta
+  })
+  .catch(error => {
+    console.error('Error al registrar:', error);
+  });
 }
 
 // Función para abrir el perfil del usuario

@@ -191,7 +191,8 @@ body {
 
 .modal input[type="text"],
 .modal input[type="password"],
-.modal input[type="email"] {
+.modal input[type="email"],
+.modal select { /* Agregar el selector para select aquí */
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -200,6 +201,7 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 
 .modal button {
     background-color: #4CAF50; /* Color verde para botones principales */
