@@ -10,12 +10,10 @@ fetch('/userData')
     .catch(error => console.error('Error al obtener los datos del usuario:', error));
 
 // funcion para obtener balance
-function getBalance() {
-    fetch('/balance')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('balance').textContent = data[0].balance;
-            console.log('Balance:', data);
-        })
-        .catch(error => console.error('Error al obtener el balance:', error));
-}
+fetch('/saldo')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('saldo').textContent = data.saldo;            
+        console.log('Saldo:', data);
+    })
+     .catch(error => console.error('Error al obtener el Saldo:', error));

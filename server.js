@@ -1,4 +1,5 @@
 // Importación de módulos necesarios para el servidor
+const { error } = require('console');
 const express = require('express');
 const mysql = require('mysql2');
 const path = require("path");
@@ -90,18 +91,23 @@ app.post('/Crear-cuenta', (req, res) => {
   // Llamar al procedimiento almacenado en la base de datos
   connection.query('CALL Crear_cuenta(?, ?, ?, ?, ?, ?)', [nombre, apellido, email, psswrd, admins, id_estado], (error, results, fields) => {
     console.log("entro")
-      if (error) {
-          console.error('Error al ejecutar el procedimiento almacenado:', error);
-          return res.status(500).json({ error: 'Error interno del servidor' });
+    if (error) {
+      console.error('Error al ejecutar el procedimiento almacenado:', error);
+      if (error.errno === 1644) {
+        return res.status(400).json({ error: 'El correo electrónico ya está registrado' });
       }
-      console.log('Cuenta creada exitosamente');
-      res.status(200).json({ message: 'Cuenta creada exitosamente' });
+      return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+    identityKey = email;
+    console.log('Cuenta creada exitosamente');
+    res.status(200).json({ message: 'Cuenta creada exitosamente' });
   });
 });
 
 // Usar identityKey para obtener el nombre y apellido del usuario
 app.get('/userData', (req, res) => {
   const query = 'SELECT * FROM Usuario WHERE email = ?';
+  console.log(identityKey)
   connection.query(query, [identityKey], (error, results) => {
     if (error) {
       console.error('Error al ejecutar la consulta:', error);
@@ -112,38 +118,53 @@ app.get('/userData', (req, res) => {
   });
 });
 
-
-app.post('/Crear-cuenta', (req, res) => {
-  // Extraer los datos de la solicitud
-  const { nombre, apellido, email, psswrd, admins, id_estado } = req.body;
-
-  console.log("entro 1")
-
-  // Llamar al procedimiento almacenado en la base de datos
-  connection.query('CALL Crear_cuenta(?, ?, ?, ?, ?, ?)', [nombre, apellido, email, psswrd, admins, id_estado], (error, results, fields) => {
-    console.log("entro")
-      if (error) {
-          console.error('Error al ejecutar el procedimiento almacenado:', error);
-          return res.status(500).json({ error: 'Error interno del servidor' });
-      }
-      console.log('Cuenta creada exitosamente');
-      res.status(200).json({ message: 'Cuenta creada exitosamente' });
-  });
-});
-
-// Endpoint POST para crear una cuenta
-app.post('/crear-cuenta', (req, res) => {
-  const { nombre, apellido, email, psswrd, admins, id_estado } = req.body;
-
-  connection.query('CALL Crear_cuenta(?, ?, ?, ?, ?, ?)', [nombre, apellido, email, psswrd, admins, id_estado], (error, results, fields) => {
-    if (error) {
-      console.error('Error al ejecutar el procedimiento almacenado:', error);
-      return res.status(500).json({ error: 'Error interno del servidor' });
+// Endpoint GET para obtener el balance de un usuario
+app.get('/saldo', (req, res) => {
+  // Check if eWallet exists for the user
+  const checkQuery = 'SELECT id_usuario FROM Usuario WHERE email = ?';
+  connection.query(checkQuery, [identityKey], (checkError, checkResults) => {
+    if (checkError) {
+      console.error('Error al verificar la existencia de la eWallet:', checkError);
+      return res.status(500).send('Error interno del servidor');
     }
-    console.log('Cuenta creada exitosamente');
-    res.status(200).json({ message: 'Cuenta creada exitosamente' });
+
+    if (checkResults.length === 0) {
+      // If user doesn't exist, return error
+      return res.status(404).send('Usuario no encontrado');
+    }
+
+    const userId = checkResults[0].id;
+
+    // Check if eWallet exists for the user
+    const eWalletQuery = 'SELECT saldo FROM eWallet WHERE id_usuario = ?';
+    connection.query(eWalletQuery, [userId], (eWalletError, eWalletResults) => {
+      if (eWalletError) {
+        console.error('Error al obtener el saldo de la eWallet:', eWalletError);
+        return res.status(500).send('Error interno del servidor');
+      }
+
+      if (eWalletResults.length > 0) {
+        // eWallet exists, return balance
+        res.json({ saldo: eWalletResults[0].saldo });
+      } else {
+        // eWallet doesn't exist, create one
+        const initialBalance = 0; // Set initial balance to 0 or any default value you prefer
+        const createQuery = 'INSERT INTO eWallet (id_usuario, saldo) VALUES (?, ?)';
+        connection.query(createQuery, [userId, initialBalance], (createError, createResults) => {
+          if (createError) {
+            console.error('Error al crear la eWallet:', createError);
+            return res.status(500).send('Error interno del servidor');
+          }
+          console.log('eWallet creada exitosamente');
+          // Return initial balance
+          res.json({ saldo: initialBalance });
+        });
+      }
+    });
   });
 });
+
+
 
 // Endpoint POST para editar una cuenta
 app.post('/editar-cuenta', (req, res) => {

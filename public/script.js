@@ -77,7 +77,7 @@ const newUser = {
   "id_estado": 1
 };
 
-fetch('/register', {
+fetch('/Crear-cuenta', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -106,7 +106,6 @@ function openUserProfile() {
   // Aquí puedes agregar cualquier lógica previa necesaria antes de mostrar el modal
   document.getElementById('user-options-modal').style.display = 'block';  // Muestra el modal de opciones del usuario
 }
-
 
 function editAccount() {
   // Esta función podría redirigir al usuario a una página de edición de perfil o mostrar un formulario de edición en un modal
