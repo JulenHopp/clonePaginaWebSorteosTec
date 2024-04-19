@@ -2,19 +2,31 @@
 <html>
 <head>
     <title>E-Wallet</title>
+    <link rel="stylesheet" type="text/css" href="ewallet.css">
 </head>
 <body>
-    
     <h1>Bienvenido, <span id="nombre"></span> <span id="apellido"></span>!</h1>
     <h2>E-Wallet</h2>
     <p>Balance: <span id="saldo"></span></p>
     
-    <!-- <p>Amount: <span id="amount"></span></p> -->
-    
     <button id="depositButton">Depositar a la e-Wallet</button>
     <button id="addPaymentButton">Add Payment Method</button>
     <button id="viewPaymentButton">View Payment Methods</button>
-    
+
+    <!-- Modal window -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Depositar a la e-Wallet</h2>
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod">
+            </select>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" min="0">
+            <button id="confirmDeposit">Confirm Deposit</button>
+        </div>
+    </div>
+
     <script src="script_ewallet.js"></script>
 </body>
 </html>

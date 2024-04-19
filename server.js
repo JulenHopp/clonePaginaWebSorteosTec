@@ -132,9 +132,8 @@ app.get('/saldo', (req, res) => {
       // If user doesn't exist, return error
       return res.status(404).send('Usuario no encontrado');
     }
-
-    const userId = checkResults[0].id;
-
+    const userId = checkResults[0].id_usuario;
+    console.log(userId);
     // Check if eWallet exists for the user
     const eWalletQuery = 'SELECT saldo FROM eWallet WHERE id_usuario = ?';
     connection.query(eWalletQuery, [userId], (eWalletError, eWalletResults) => {
@@ -146,20 +145,51 @@ app.get('/saldo', (req, res) => {
       if (eWalletResults.length > 0) {
         // eWallet exists, return balance
         res.json({ saldo: eWalletResults[0].saldo });
-      } else {
-        // eWallet doesn't exist, create one
-        const initialBalance = 0; // Set initial balance to 0 or any default value you prefer
-        const createQuery = 'INSERT INTO eWallet (id_usuario, saldo) VALUES (?, ?)';
-        connection.query(createQuery, [userId, initialBalance], (createError, createResults) => {
-          if (createError) {
-            console.error('Error al crear la eWallet:', createError);
-            return res.status(500).send('Error interno del servidor');
-          }
-          console.log('eWallet creada exitosamente');
-          // Return initial balance
-          res.json({ saldo: initialBalance });
-        });
       }
+    });
+  });
+});
+
+
+app.get('/paymentMethods', (req, res) => {
+  // Check if eWallet exists for the user
+  const checkQuery = 'SELECT id_usuario FROM Usuario WHERE email = ?';
+  connection.query(checkQuery, [identityKey], (checkError, checkResults) => {
+    if (checkError) {
+      console.error('Error al verificar la existencia de la eWallet:', checkError);
+      return res.status(500).send('Error interno del servidor');
+    }
+
+    if (checkResults.length === 0) {
+      // If user doesn't exist, return error
+      return res.status(404).send('Usuario no encontrado');
+    }
+
+    const id_usuario = checkResults[0].id_usuario;
+
+    // Consulta para obtener los métodos de pago asociados con la eWallet del usuario
+    const idwalletQuery = 'SELECT id_wallet FROM eWallet WHERE id_usuario = ?';
+
+    connection.query(idwalletQuery, [id_usuario], (errorWallet, walletResults) => {
+      if (errorWallet) {
+        console.error('Error al obtener los métodos de pago:', errorWallet);
+        return res.status(500).send('Error interno del servidor');
+      }
+
+      const idwallet = walletResults[0].id_wallet;
+
+      // Consulta corregida para obtener los métodos de pago
+      const methodsQuery = 'SELECT nombre FROM Métodos_Pago WHERE id_wallet = ?';
+      connection.query(methodsQuery, [idwallet], (errorMethods, methodsResults) => {
+        if (errorMethods) {
+          console.error('Error al obtener los métodos de pago:', errorMethods);
+          return res.status(500).send('Error interno del servidor');
+        }
+
+        // Enviar los resultados al cliente
+        console.log(methodsResults);
+        res.json(methodsResults);
+      });
     });
   });
 });
