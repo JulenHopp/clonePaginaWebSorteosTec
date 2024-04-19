@@ -17,21 +17,6 @@ fetch('/saldo')
     })
      .catch(error => console.error('Error al obtener el Saldo:', error));
 
-
-// Function to handle opening the modal window
-function openDepositModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
-
-    // Close the modal when the close button or outside the modal is clicked
-    var closeButton = document.getElementsByClassName("close")[0];
-    window.onclick = function(event) {
-        if (event.target == modal || event.target == closeButton) {
-            modal.style.display = "none";
-        }
-    }
-}
-
 // Opciones depositos
 fetch('/paymentMethods')
     .then(response => response.json())
@@ -50,7 +35,22 @@ fetch('/paymentMethods')
 document.getElementById("depositButton").addEventListener("click", openDepositModal);
 // Event listener for the "Añadir Método de Pago" button
 document.getElementById("addPaymentButton").addEventListener("click", openPaymentModal);
+// Event listener for the "Ver Métodos de Pago" button
+document.getElementById("viewPaymentButton").addEventListener("click", openViewPaymentModal);
 
+// Function to handle opening the modal window
+function openDepositModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+
+    // Close the modal when the close button or outside the modal is clicked
+    var closeButton = document.getElementsByClassName("close")[0];
+    window.onclick = function(event) {
+        if (event.target == modal || event.target == closeButton) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 // Funcion para abrir el modal de metodos de pago
 function openPaymentModal() {
@@ -65,6 +65,22 @@ function openPaymentModal() {
         }
     }
 }
+
+function openViewPaymentModal() {
+    var modal = document.getElementById("viewPaymentModal");
+    modal.style.display = "block";
+
+    // Close the modal when the close button or outside the modal is clicked
+    var closeButton = document.getElementsByClassName("close")[2];
+    window.onclick = function(event) {
+        if (event.target == modal || event.target == closeButton) {
+            modal.style.display = "none";
+        }
+    }
+    mostrarMetodos();
+}
+
+
 // Función para guardar métodos de pago
 function insertarMetodoDatos(event) {
     console.log("entro a insertar metodo");
@@ -137,4 +153,20 @@ function depositar(cantidad, metodo) {
     .catch(error => {
         console.error('Error al depositar:', error);
     });
+}
+
+function mostrarMetodos() {
+    fetch('/paymentMethods')
+    .then(response => response.json())
+    .then(data => {
+        const tabla = document.getElementById('tablaMetodos');
+        data.forEach(metodo => {
+            var row = tabla.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = metodo.nombre;
+            cell2.innerHTML = metodo.numero_tarjeta;
+        });
+    })
+    .catch(error => console.error('Error al obtener los métodos de pago:', error));
 }

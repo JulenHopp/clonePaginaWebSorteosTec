@@ -163,7 +163,7 @@ app.get('/paymentMethods', (req, res) => {
       const idwallet = walletResults[0].id_wallet;
 
       // Consulta corregida para obtener los métodos de pago
-      const methodsQuery = 'SELECT nombre FROM Métodos_Pago WHERE id_wallet = ?';
+      const methodsQuery = 'SELECT nombre, numero_tarjeta FROM Métodos_Pago WHERE id_wallet = ?';
       connection.query(methodsQuery, [idwallet], (errorMethods, methodsResults) => {
         if (errorMethods) {
           console.error('Error al obtener los métodos de pago:', errorMethods);
