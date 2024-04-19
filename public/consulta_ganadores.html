@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteos Tec</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/general.css">
+</head>
+<body>
+    <header class="header">
+        <div class="parte-superior">
+            <a href="">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
+        </div>
+        <div class="parte-media">
+            <img src="images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            <button>
+                <img src="images\boleto.svg" alt="Boleto">
+                Comprar boletos
+            </button>
+        </div>
+        <div class="parte-inferior">
+            <nav class="header-navbar">
+                <ul class="navbar-items">
+                    <li><a href="">Sorteos  </a><img src="images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
+                    <li><a href="membresias.html">Membersias de la suerte</a></li>
+                    <li><a href="nuestra_causa.html">Nuestra causa</a></li>
+                    <li><a href="games.html">Juegos</a></li>
+                    <li><a href="ewallet.html">E-wallet</a></li>
+                </ul>
+            </nav>
+            <!-- Botón de Inicio de Sesión y Perfil -->
+            <div id="auth-container">
+                <button id="login-btn" onclick="showLogin()">
+                    <img src="images\perfil.svg" alt="Imagen iniciar sección" >
+                    Iniciar Sesión
+                </button>
+            </div>
+
+            <!-- Modal de Inicio de Sesión -->
+            <div id="login-modal" class="modal" style="display:none;">
+                <form onsubmit="login(event)">
+                    <h2>Iniciar Sesión</h2>
+                    <label for="login-username">E-mail:</label>
+                    <input type="text" id="login-username" required>
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showRegister()">Crear Cuenta</button>
+                    <button type="button" onclick="hideLogin()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Creación de Cuenta -->
+            <div id="register-modal" class="modal" style="display:none;">
+                <form onsubmit="register(event)">
+                    <h2>Crear Cuenta</h2>
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" required>
+                    <label for="last-name">Apellido:</label>
+                    <input type="text" id="last-name" required>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Contraseña:</label>
+                    <input type="password" id="register-password" required>
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="hideRegister()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Opciones del Usuario -->
+            <div id="user-options-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Opciones del Usuario</h2>
+                    <button type="button" onclick="editAccount()">Editar Cuenta</button>
+                    <button type="button" onclick="logout()">Cerrar Sesión</button>
+                    <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <img class="content-img" src="backgrounds\nuestra_causa.png" alt="">
+    </div>
+
+</body>
+</html>
