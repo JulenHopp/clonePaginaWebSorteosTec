@@ -63,10 +63,8 @@ app.post('/authenticate', (req, res) => {
           res.status(500).send('Error interno del servidor');
           return;
       }
-      console.log("entro 1");
       // Check if results exist and have at least one row
       if (results && results.length > 0) {
-        console.log("entro 2");
           // Comparación de la contraseña y manejo de la respuesta
           if (password === results[0].psswrd) {
             identityKey = results[0].email;
@@ -85,12 +83,8 @@ app.post('/authenticate', (req, res) => {
 app.post('/Crear-cuenta', (req, res) => {
   // Extraer los datos de la solicitud
   const { nombre, apellido, email, psswrd, admins, id_estado } = req.body;
-
-  console.log("entro 1")
-
   // Llamar al procedimiento almacenado en la base de datos
   connection.query('CALL Crear_cuenta(?, ?, ?, ?, ?, ?)', [nombre, apellido, email, psswrd, admins, id_estado], (error, results, fields) => {
-    console.log("entro")
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       if (error.errno === 1644) {
@@ -164,9 +158,8 @@ app.get('/paymentMethods', (req, res) => {
       // If user doesn't exist, return error
       return res.status(404).send('Usuario no encontrado');
     }
-
+    console.log(checkResults);
     const id_usuario = checkResults[0].id_usuario;
-
     // Consulta para obtener los métodos de pago asociados con la eWallet del usuario
     const idwalletQuery = 'SELECT id_wallet FROM eWallet WHERE id_usuario = ?';
 
@@ -175,7 +168,7 @@ app.get('/paymentMethods', (req, res) => {
         console.error('Error al obtener los métodos de pago:', errorWallet);
         return res.status(500).send('Error interno del servidor');
       }
-
+      console.log(walletResults);
       const idwallet = walletResults[0].id_wallet;
 
       // Consulta corregida para obtener los métodos de pago
@@ -194,6 +187,24 @@ app.get('/paymentMethods', (req, res) => {
   });
 });
 
+app.post('/insertarMetodoPago', (req, res) => {
+  // Extraer los datos de la solicitud
+  const { usuario_email, nombre_metodo, numero_tarjeta } = req.body;
+
+  // Llamar al procedimiento almacenado en la base de datos
+  connection.query('CALL Insertar_metodo_pago(?, ?, ?)', [identityKey, nombre_metodo, numero_tarjeta], (error, results, fields) => {
+    if (error) {
+      console.error('Error al ejecutar el procedimiento almacenado:', error);
+      if (error.code === 'PROCEDURE_ERROR') {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: 'Error interno del servidor' });
+      }
+    }
+    console.log('Método de pago insertado exitosamente');
+    res.status(200).json({ message: 'Método de pago insertado exitosamente' });
+  });
+});
 
 
 // Endpoint POST para editar una cuenta

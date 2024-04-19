@@ -49,6 +49,53 @@ fetch('/paymentMethods')
 
 // Event listener for the "Depositar a la e-Wallet" button
 document.getElementById("depositButton").addEventListener("click", openDepositModal);
+// Event listener for the "Añadir Método de Pago" button
+document.getElementById("addPaymentButton").addEventListener("click", openPaymentModal);
 
-// Event listener for the "Confirm Deposit" button inside the modal
-//document.getElementById("confirmDeposit").addEventListener("click", depositToEWallet);
+
+// Funcion para abrir el modal de metodos de pago
+function openPaymentModal() {
+    var modal = document.getElementById("addPaymentModal");
+    modal.style.display = "block";
+
+    // Close the modal when the close button or outside the modal is clicked
+    var closeButton = document.getElementsByClassName("close")[1];
+    window.onclick = function(event) {
+        if (event.target == modal || event.target == closeButton) {
+            modal.style.display = "none";
+        }
+    }
+}
+// Función para guardar métodos de pago
+function insertarMetodo(event) {
+    console.log("entro a insertar metodo");
+    var nombre = document.getElementById('Selectnombre').value;
+    var numero_tarjeta = document.getElementById('numero_tarjeta').value;
+
+    const metodoPago = {
+        "nombre": nombre,
+        "numero_tarjeta": numero_tarjeta
+    };
+
+    fetch('/insertarMetodoPago', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(metodoPago)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al insertar el método de pago');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Método de pago insertado exitosamente:', data);
+        // Aquí puedes realizar alguna acción adicional si lo deseas, como actualizar la interfaz de usuario
+    })
+    .catch(error => {
+        console.error('Error al insertar el método de pago:', error);
+    });
+}
+

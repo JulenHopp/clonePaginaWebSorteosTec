@@ -10,8 +10,8 @@
     <p>Balance: <span id="saldo"></span></p>
     
     <button id="depositButton">Depositar a la e-Wallet</button>
-    <button id="addPaymentButton">Add Payment Method</button>
-    <button id="viewPaymentButton">View Payment Methods</button>
+    <button id="viewPaymentButton">Ver Métodos de Pago</button>
+    <button id="addPaymentButton">Añadir Método de Pago</button>
 
     <!-- Modal window -->
     <div id="myModal" class="modal">
@@ -26,6 +26,60 @@
             <button id="confirmDeposit">Confirm Deposit</button>
         </div>
     </div>
+
+   <!-- Modal window for adding payment method -->
+<div id="addPaymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="addPaymentForm" onsubmit= "insertarMetodo(event)">
+            <h2>Añadir Método de Pago</h2>
+            <label for="paymentMethodType">Tipo de Método de Pago:</label>
+            <select id="paymentMethodType">
+                <option value="credit">Crédito</option>
+                <option value="debit">Débito</option>
+            </select>
+            <label for="Selectnombre">Nombre del Método:</label>
+            <select id="nombre">
+                <option value="paypal">Paypal</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+            </select>
+            <label for="numero_tarjeta">Número:</label>
+            <input type="text" id="numero_tarjeta">
+            <label for="paymentMethodExpiration">Fecha de Expiración:</label>
+            <select id="paymentMethodExpiration">
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <label for="paymentMethodExpirationYear">Año de Expiración:</label>
+            <select id="paymentMethodExpirationYear">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+            </select>
+            <label for="paymentMethodCVV">CVV:</label>
+            <input type="text" id="paymentMethodCVV">
+            <button type="submit">Confirmar</button>
+            <!-- cuando se le pique al boton se mandan los datos -->
+        </form>
+    </div>
+</div>
 
     <script src="script_ewallet.js"></script>
 </body>
