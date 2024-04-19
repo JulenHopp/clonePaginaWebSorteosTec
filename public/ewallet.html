@@ -29,17 +29,19 @@
     <button id="depositButton" class="styled-button">Depositar a la e-Wallet</button>
     <button id="viewPaymentButton" class="styled-button">Ver Métodos de Pago</button>
     <button id="addPaymentButton" class="styled-button">Añadir Método de Pago</button>
-<!-- Modal window -->
-<div id="myModal" class="modal">
+ <!-- Modal window -->
+ <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Depositar a la e-Wallet</h2>
-        <label for="paymentMethod" class = "label">Payment Method:</label>
-        <select id="paymentMethod">
-        </select>
-        <label for="amount" class = "label">Amount:</label>
-        <input type="number" id="amount" min="0">
-        <button id="confirmDeposit" class="styled-button">Confirm Deposit</button>
+        <form id="depositForm" onsubmit="depositarSaldo(event)">
+            <h2>Depositar a la e-Wallet</h2>
+            <label for="metodo">Método de Pago:</label>
+            <select id="metodo">
+            </select>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" min="0">
+            <button type="submit">Confirmar Deposito</button>
+        </form>
     </div>
 </div>
 

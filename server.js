@@ -210,9 +210,9 @@ app.post('/editar-cuenta', (req, res) => {
 
 // Endpoint POST para registrar una transacción real
 app.post('/registrar-transaccion-real', (req, res) => {
-  const { usuario_email, deposito, id_metodo } = req.body;
+  const { usuario_email, cantidad, metodo } = req.body;
 
-  connection.query('CALL Registrar_transaccion_real(?, ?, ?)', [usuario_email, deposito, id_metodo], (error, results, fields) => {
+  connection.query('CALL Registrar_transaccion_real(?, ?, ?)', [identityKey, cantidad, metodo], (error, results, fields) => {
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       return res.status(500).json({ error: 'Error interno del servidor' });

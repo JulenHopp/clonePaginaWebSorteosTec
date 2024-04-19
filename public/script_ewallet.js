@@ -36,10 +36,10 @@ function openDepositModal() {
 fetch('/paymentMethods')
     .then(response => response.json())
     .then(data => {
-        const select = document.getElementById('paymentMethod'); // Seleccionar el elemento <select>
-        data.forEach(paymentMethod => {
+        const select = document.getElementById('metodo'); // Seleccionar el elemento <select>
+        data.forEach(metodo => {
             var option = document.createElement("option");
-            option.text = paymentMethod.nombre; // Acceder al valor 'nombre'
+            option.text = metodo.nombre; // Acceder al valor 'nombre'
             select.add(option);
         });
     })
@@ -105,3 +105,36 @@ function insertarMetodo(nombre, numero_tarjeta) {
     });
 }
 
+// Función para guardar depositos
+function depositarSaldo(event) {
+    console.log("entro a depositar");
+    var cantidad = event.target.querySelector('#cantidad').value;
+    var metodo = event.target.querySelector('#metodo').value;
+    depositar(cantidad, metodo);
+}
+
+function depositar(cantidad, metodo) {
+    const deposito = {
+        cantidad: cantidad,
+        metodo: metodo
+    };
+    fetch('/registrar-transaccion-real', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(deposito)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al depositar');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Deposito exitoso:', deposito);
+    })
+    .catch(error => {
+        console.error('Error al depositar:', error);
+    });
+}
