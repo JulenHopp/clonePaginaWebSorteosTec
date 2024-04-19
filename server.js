@@ -155,7 +155,6 @@ app.get('/paymentMethods', (req, res) => {
     const id_usuario = checkResults[0].id_usuario;
     // Consulta para obtener los métodos de pago asociados con la eWallet del usuario
     const idwalletQuery = 'SELECT id_wallet FROM eWallet WHERE id_usuario = ?';
-
     connection.query(idwalletQuery, [id_usuario], (errorWallet, walletResults) => {
       if (errorWallet) {
         console.error('Error al obtener los métodos de pago:', errorWallet);
