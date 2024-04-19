@@ -12,25 +12,115 @@
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #fff; /* Cambiado a blanco */
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: none; /* Eliminado el borde */
     width: 50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px; /* Agregado el borde redondeado */
+    font-family: Arial, sans-serif; /* Fuente Arial */
 }
 
 /* Close button style */
 .close {
-    color: #aaa;
+    color: #1B3589; /* Cambiado a azul Sorteos Tec */
     float: right;
-    font-size: 28px;
+    font-size: 24px; /* Ajustado el tamaño de la fuente */
     font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: #000; /* Cambiado a negro */
     text-decoration: none;
     cursor: pointer;
+}
+
+
+.footer {
+    background-color: #1B3589;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #1B3589;
+    padding: 10px 0;
+}
+
+.navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-list li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar-list li.back-button {
+    float: right;
+    margin-top: -40px;
+}
+
+.navbar-list li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-list li a:hover {
+    color: #ffcc00;
+}
+
+/* Estilos para el botón "Back" */
+.back-button a {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    
+}
+
+.back-button a:hover {
+    background-color: white;
+    color: #1B3589;
+    padding: 10px 20px;
+
+}
+
+/* Estilos para los botones */
+.styled-button {
+    background-color: #1B3589;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.styled-button:hover {
+    background-color: #0D1B4C;
+}
+/* Estilos para los labels */
+label {
+    color: #1B3589; /* Color del texto */
+    font-family: Arial, sans-serif; /* Fuente */
+    display: block; /* Hacer que los labels sean bloques para que estén en líneas separadas */
+    margin-bottom: 10px; /* Espacio inferior entre los labels */
+}
+.balance {
+    font-family: Arial, sans-serif; /* Set font family */
+    color: #1B3589; /* Set text color */
+    font-size: 16px; /* Set font size */
+    font-weight: bold;
+
 }

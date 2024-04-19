@@ -3,50 +3,66 @@
 <head>
     <title>E-Wallet</title>
     <link rel="stylesheet" type="text/css" href="ewallet.css">
+    <style>
+        /* Styles for h2 */
+        h2 {
+            color: #1B3589; /* Color azul Sorteos Tec */
+            font-family: Arial, sans-serif; /* Fuente Arial */
+        }
+        h1 {
+            margin-left: 10px;
+            color: white; /* Cambiado a color blanco */
+            font-family: Arial, sans-serif; /* Fuente Arial */
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido, <span id="nombre"></span> <span id="apellido"></span>!</h1>
-    <h2>E-Wallet</h2>
-    <p>Balance: <span id="saldo"></span></p>
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <h1>Bienvenido a tu E-Wallet, <span id="nombre"></span> <span id="apellido"></span>!</h1>
+            <li class="back-button"><a href="index.html">Back</a></li>
+        </ul>
+    </nav>
+
+    <p class="balance">Balance: <span id="saldo"></span></p>
     
-    <button id="depositButton">Depositar a la e-Wallet</button>
-    <button id="viewPaymentButton">Ver Métodos de Pago</button>
-    <button id="addPaymentButton">Añadir Método de Pago</button>
-
-    <!-- Modal window -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Depositar a la e-Wallet</h2>
-            <label for="paymentMethod">Payment Method:</label>
-            <select id="paymentMethod">
-            </select>
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" min="0">
-            <button id="confirmDeposit">Confirm Deposit</button>
-        </div>
+    <button id="depositButton" class="styled-button">Depositar a la e-Wallet</button>
+    <button id="viewPaymentButton" class="styled-button">Ver Métodos de Pago</button>
+    <button id="addPaymentButton" class="styled-button">Añadir Método de Pago</button>
+<!-- Modal window -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Depositar a la e-Wallet</h2>
+        <label for="paymentMethod" class = "label">Payment Method:</label>
+        <select id="paymentMethod">
+        </select>
+        <label for="amount" class = "label">Amount:</label>
+        <input type="number" id="amount" min="0">
+        <button id="confirmDeposit" class="styled-button">Confirm Deposit</button>
     </div>
+</div>
 
-   <!-- Modal window for adding payment method -->
+<!-- Modal window for adding payment method -->
 <div id="addPaymentModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="addPaymentForm" onsubmit= "insertarMetodoDatos(event)">
+        <form id="addPaymentForm" onsubmit="insertarMetodoDatos(event)">
             <h2>Añadir Método de Pago</h2>
-            <label for="paymentMethodType">Tipo de Método de Pago:</label>
+            <label for="paymentMethodType" class = "label">Tipo de Método de Pago:</label>
             <select id="paymentMethodType">
                 <option value="credit">Crédito</option>
                 <option value="debit">Débito</option>
             </select>
-            <label for="Selectnombre">Nombre del Método:</label>
+            <label for="Selectnombre"  class = "label">Nombre del Método:</label>
             <select id="nombre">
                 <option value="PayPal">Paypal</option>
                 <option value="Visa">Visa</option>
                 <option value="Mastercard">Mastercard</option>
             </select>
-            <label for="numero_tarjeta">Número:</label>
+            <label for="numero_tarjeta" class = "label">Número:</label>
             <input type="text" id="numero_tarjeta">
-            <label for="paymentMethodExpiration">Fecha de Expiración:</label>
+            <label for="paymentMethodExpiration" class = "label">Fecha de Expiración:</label>
             <select id="paymentMethodExpiration">
                 <option value="01">Enero</option>
                 <option value="02">Febrero</option>
@@ -61,7 +77,7 @@
                 <option value="11">Noviembre</option>
                 <option value="12">Diciembre</option>
             </select>
-            <label for="paymentMethodExpirationYear">Año de Expiración:</label>
+            <label for="paymentMethodExpirationYear" class = "label">Año de Expiración:</label>
             <select id="paymentMethodExpirationYear">
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -71,14 +87,18 @@
                 <option value="2029">2029</option>
                 <option value="2030">2030</option>
             </select>
-            <label for="paymentMethodCVV">CVV:</label>
+            <label for="paymentMethodCVV" class = "label">CVV:</label>
             <input type="text" id="paymentMethodCVV">
-            <button type="submit">Confirmar</button>
+            <button type="submit" class="styled-button">Confirmar</button>
             <!-- cuando se le pique al boton se mandan los datos -->
         </form>
     </div>
 </div>
 
+<footer class="footer">
+    <p>&copy; 2024 Future Games</p>
+</footer>
     <script src="script_ewallet.js"></script>
 </body>
 </html>
+
