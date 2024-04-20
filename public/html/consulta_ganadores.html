@@ -4,36 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteos Tec</title>
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/general.css">
 </head>
 <body>
     <header class="header">
         <div class="parte-superior">
-            <a href="">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
+            <a href="sorteos.html">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
         </div>
         <div class="parte-media">
-            <img src="images\Principal-Blanco_5.png" alt="Logo sorteos tec">
-            <button>
-                <img src="images\boleto.svg" alt="Boleto">
-                Comprar boletos
-            </button>
+            <a href="../index.html">
+                <img src="../images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            </a>
+            <a href="sorteos.html">
+                <button>
+                    <img src="../images\boleto.svg" alt="Boleto">
+                    Comprar boletos
+                </button>
+            </a>
         </div>
         <div class="parte-inferior">
             <nav class="header-navbar">
                 <ul class="navbar-items">
-                    <li><a href="">Sorteos  </a><img src="images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="sorteos.html">Sorteos  </a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
                     <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
                     <li><a href="membresias.html">Membersias de la suerte</a></li>
                     <li><a href="nuestra_causa.html">Nuestra causa</a></li>
-                    <li><a href="games.html">Juegos</a></li>
-                    <li><a href="ewallet.html">E-wallet</a></li>
+                    <li><a href="../games.html">Juegos</a></li>
+                    <li><a href="../ewallet.html">E-wallet</a></li>
                 </ul>
             </nav>
             <!-- Botón de Inicio de Sesión y Perfil -->
             <div id="auth-container">
                 <button id="login-btn" onclick="showLogin()">
-                    <img src="images\perfil.svg" alt="Imagen iniciar sección" >
+                    <img src="../images\perfil.svg" alt="Imagen iniciar sección" >
                     Iniciar Sesión
                 </button>
             </div>
@@ -64,6 +68,41 @@
                     <input type="email" id="register-email" required>
                     <label for="register-password">Contraseña:</label>
                     <input type="password" id="register-password" required>
+                    <label for="register-state">Estado:</label>
+                    <select id="register-state" required>
+                        <option value="1">Aguascalientes</option>
+                        <option value="2">Baja California</option>
+                        <option value="3">Baja California Sur</option>
+                        <option value="4">Campeche</option>
+                        <option value="5">Chiapas</option>
+                        <option value="6">Chihuahua</option>
+                        <option value="7">Ciudad de México</option>
+                        <option value="8">Coahuila</option>
+                        <option value="9">Colima</option>
+                        <option value="10">Durango</option>
+                        <option value="11">Guanajuato</option>
+                        <option value="12">Guerrero</option>
+                        <option value="13">Hidalgo</option>
+                        <option value="14">Jalisco</option>
+                        <option value="15">México</option>
+                        <option value="16">Michoacán</option>
+                        <option value="17">Morelos</option>
+                        <option value="18">Nayarit</option>
+                        <option value="19">Nuevo León</option>
+                        <option value="20">Oaxaca</option>
+                        <option value="21">Puebla</option>
+                        <option value="22">Querétaro</option>
+                        <option value="23">Quintana Roo</option>
+                        <option value="24">San Luis Potosí</option>
+                        <option value="25">Sinaloa</option>
+                        <option value="26">Sonora</option>
+                        <option value="27">Tabasco</option>
+                        <option value="28">Tamaulipas</option>
+                        <option value="29">Tlaxcala</option>
+                        <option value="30">Veracruz</option>
+                        <option value="31">Yucatán</option>
+                        <option value="32">Zacatecas</option>
+                    </select>
                     <button type="submit">Registrar</button>
                     <button type="button" onclick="hideRegister()">Cerrar</button>
                 </form>
@@ -82,7 +121,7 @@
     </header>
 
     <div class="content">
-        <img class="content-img" src="backgrounds\membresias.png" alt="">
+        <img class="content-img" src="../images/backgrounds/consulta_ganadores.png" alt="">
     </div>
 
 </body>
