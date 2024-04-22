@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre de tu juego</title>
+</head>
+<body>
+    <div id="unity-container" style="width: 100%; height: 100%;">
+        <canvas id="unity-canvas" width="960" height="600"></canvas>
+        <script src="EncuentraBorregos.loader.js"></script>
+        <script>
+            var gameInstance = UnityLoader.instantiate("unity-container", "NombreDeTuJuego/NombreDeTuJuego.json", {onProgress: UnityProgress});
+        </script>
+    </div>
+</body>
+</html>
