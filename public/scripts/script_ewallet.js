@@ -17,18 +17,20 @@ fetch('/saldo')
     })
      .catch(error => console.error('Error al obtener el Saldo:', error));
 
-// Opciones depositos
 fetch('/paymentMethods')
     .then(response => response.json())
     .then(data => {
-        const select = document.getElementById('metodo'); // Seleccionar el elemento <select>
+        const select = document.getElementById('metodo'); // Select the <select> element
         data.forEach(metodo => {
             var option = document.createElement("option");
-            option.text = metodo.nombre; // Acceder al valor 'nombre'
+            let numeroTarjeta = metodo.numero_tarjeta.toString();
+            console.log(numeroTarjeta);
+            option.text = metodo.nombre + " " + numeroTarjeta.slice(12, 16); 
             select.add(option);
         });
     })
-    .catch(error => console.error('Error al obtener los métodos de pago:', error));
+    .catch(error => console.error('Error fetching payment methods:', error));
+ 
 
 
 // Event listener for the "Depositar a la e-Wallet" button
@@ -87,9 +89,11 @@ function insertarMetodoDatos(event) {
     //var nombre = document.getElementById('nombre').value;
     var nombre = event.target.querySelector('#nombre').value;
     var numero_tarjeta = event.target.querySelector('#numero_tarjeta').value;
-    console.log(nombre);
+    if (numero_tarjeta.length != 16) {
+        alert("El número de tarjeta debe tener 16 dígitos");
+        return;
+    }
     //var numero_tarjeta = document.getElementById('numero_tarjeta').value;
-    console.log(numero_tarjeta);
     insertarMetodo(nombre, numero_tarjeta);
 }
 
