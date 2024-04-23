@@ -25,7 +25,7 @@ fetch('/paymentMethods')
             var option = document.createElement("option");
             let numeroTarjeta = metodo.numero_tarjeta.toString();
             console.log(numeroTarjeta);
-            option.text = metodo.nombre + " " + numeroTarjeta.slice(12, 16); 
+            option.text = metodo.nombre + " *" + numeroTarjeta.slice(12, 16); 
             select.add(option);
         });
     })
@@ -82,6 +82,11 @@ function openViewPaymentModal() {
     mostrarMetodos();
 }
 
+function insertarYChecar(event) {
+    insertarMetodoDatos(event);
+    checarFecha(event);
+}
+
 
 // Función para guardar métodos de pago
 function insertarMetodoDatos(event) {
@@ -125,6 +130,16 @@ function insertarMetodo(nombre, numero_tarjeta) {
     });
 }
 
+function checarFecha(event) {
+    var mes = event.target.querySelector('#mes').value;
+    var anio = event.target.querySelector('#anio').value;
+    var today = new Date();
+    var expiry = new Date(anio, mes - 1); // Subtract 1 from month since it is zero-based
+    if (today > expiry) {
+        alert("La tarjeta ha expirado");
+        return;
+    }
+}
 // Función para guardar depositos
 function depositarSaldo(event) {
     console.log("entro a depositar");
