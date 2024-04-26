@@ -112,18 +112,28 @@
             <div id="user-options-modal" class="modal" style="display:none;">
                 <form>
                     <h2>Opciones del Usuario</h2>
+                    <!-- calls function to create a Data Analytics button if isAdmin-->
+                    
                     <button type="button" onclick="editAccount()">Editar Cuenta</button>
                     <button type="button" onclick="logout()">Cerrar Sesión</button>
                     <button type="button" onclick="hideUserOptions()">Cerrar</button>
                 </form>
             </div>
+
+            <!-- Modal Admin -->
+            <div id="admin-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Panel de Administrador</h2>
+                    <button type="button" onclick="showAdminPanel()">Administrar Sorteos</button>
+                    <button type="button" onclick="hideAdmin()">Cerrar</button>
+                </form>
         </div>
     </header>
 
     <div class="content">
         <img class="content-img" src="images\backgrounds\inicio-content.png" alt="">
     </div>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
 
 </body>
 </html>

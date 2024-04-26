@@ -68,7 +68,7 @@ app.post('/authenticate', (req, res) => {
           // Comparación de la contraseña y manejo de la respuesta
           if (password === results[0].psswrd) {
             identityKey = results[0].email;
-              res.json({ message: 'Autenticación exitosa', firstName: results[0].nombre ,admin: results[0].admins });
+              res.json({ message: 'Autenticación exitosa', firstName: results[0].nombre ,admins: results[0].admins });
           } else {
               res.status(401).send('Usuario o contraseña incorrectos');
           }

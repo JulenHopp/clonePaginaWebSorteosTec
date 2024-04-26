@@ -48,11 +48,19 @@ fetch('/authenticate', {
   console.log('Autenticación exitosa:', data);
   const usuarioElement = document.getElementById('auth-container');
   usuarioElement.innerHTML = `<button onclick="openUserProfile()">Bienvenido, ${data.firstName}</button>`;
+  console.log(data.admins);
+  if (data.admins == 1) {
+    document.getElementById('admin-modal').style.display = 'block';
+  }
   hideLogin();  // Cierra el modal de inicio de sesión
 })
 .catch(error => {
   console.error('Error al autenticar:', error);
 });
+}
+
+function hideAdmin() {
+  document.getElementById('admin-modal').style.display = 'none';
 }
 
 // Función para manejar el registro de la cuenta
