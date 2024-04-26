@@ -51,6 +51,8 @@ fetch('/authenticate', {
   console.log(data.admins);
   if (data.admins == 1) {
     document.getElementById('admin-modal').style.display = 'block';
+    hideLogin();  // Cierra el modal de inicio de sesión
+    createAdminButton();
   }
   hideLogin();  // Cierra el modal de inicio de sesión
 })
@@ -61,6 +63,17 @@ fetch('/authenticate', {
 
 function hideAdmin() {
   document.getElementById('admin-modal').style.display = 'none';
+}
+
+function createAdminButton() {
+  const navbar = document.querySelector('.header-navbar'); 
+  const button = document.createElement('a');
+  button.textContent = 'Admin Panel'; 
+  button.addEventListener('click', () => {
+    // Add functionality for admin panel button (e.g., showing admin modal)
+    button.href = 'html/admin.html';
+  });
+  navbar.appendChild(button);
 }
 
 // Función para manejar el registro de la cuenta
@@ -138,6 +151,7 @@ function registerAccount(firstName, lastName, email, password, stateId) {
     console.error('Error al registrar:', error);
   });
 }
+
 
 // Función para abrir el perfil del usuario
 function openUserProfile() {
