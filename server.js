@@ -320,6 +320,48 @@ app.post('/buscaBorrego/ingresarGanancia', (req, res) => {
       res.send('Transacción registrada correctamente');
   });
 });
+
+///////////////////////////
+// APIS BORREGO TOWER /////
+///////////////////////////
+let dinero_inicial_borregoTower = 10;
+const id_borregoTower = 2;
+
+app.post('/borregoTower/registrarCompraJuego', (req, res) => {
+  console.log("Entro a registrarCompraJuego");
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey, dinero_inicial_borregoTower, id_borregoTower], (error, results, fields) => {
+    if (error) {
+      console.error('Error en la base de datos:', error);
+      return res.status(500).send('Error al procesar la compra del juego');
+    }
+    res.send('Compra registrada correctamente');
+  });
+});
+
+app.post('/borregoTower/ingresarGanancia', (req, res) => {
+  console.log("Entro a ingresarGanancia");
+  const { cantidad } = req.body;
+  
+  if (!cantidad) {
+      return res.status(400).send('La cantidad es necesaria para procesar la transacción.');
+  }
+
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey,  -1 * cantidad, id_borregoTower], (error, results, fields) => {
+      if (error) {
+          console.error('Error al ejecutar el procedimiento almacenado:', error);
+          return res.status(500).send('Error interno del servidor');
+      }
+      res.send('Transacción registrada correctamente');
+  });
+});
+
+
+///////////////////////////
+// APIS BORREGO JUMP /////
+///////////////////////////
+
 ///////////////////////////
 // COSAS DEL SERVIDOR /////
 ///////////////////////////
