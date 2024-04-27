@@ -1,7 +1,8 @@
 let userData = {
   nombre: null,
   apellido: null,
-  saldo: null
+  saldo: null,
+  admin: false
 };
 
 function updateButtons() {
@@ -46,7 +47,8 @@ function checkIdentityAndLoadData() {
           userData = {
             nombre: userDataResponse[0].nombre,
             apellido: userDataResponse[0].apellido,
-            saldo: saldoResponse.saldo
+            saldo: saldoResponse.saldo,
+            admin: userDataResponse[0].admins,
           };
           // Actualiza la interfaz de usuario con los datos del usuario
           usuarioElement.innerHTML = `
@@ -56,6 +58,10 @@ function checkIdentityAndLoadData() {
                 <img src="/images/perfil.svg" alt="Imagen iniciar sección"> Bienvenido, ${userData.nombre}
               </button>
             </div>`;
+          console.log('Datos del usuario:', userData.admin);
+          if(userData.admin == 1){
+            createAdminButton();
+          }
         }).catch(error => {
           console.error('Error fetching user data or saldo:', error);
         });
@@ -117,14 +123,12 @@ fetch('/authenticate', {
 })
 .then(data => {
   console.log('Autenticación exitosa:', data);
-  //const usuarioElement = document.getElementById('auth-container');
-  //usuarioElement.innerHTML = `<button onclick="openUserProfile()">Bienvenido, ${data.firstName}</button>`;
   checkIdentityAndLoadData();
-  console.log(data.admins);
   if (data.admins == 1) {
+    userData.admin = true;
     document.getElementById('admin-modal').style.display = 'block';
     hideLogin();  // Cierra el modal de inicio de sesión
-    createAdminButton();
+    //createAdminButton();
   }
   hideLogin();  // Cierra el modal de inicio de sesión
 })
@@ -138,14 +142,34 @@ function hideAdmin() {
 }
 
 function createAdminButton() {
-  const navbar = document.querySelector('.header-navbar'); 
+  // Selecciona la lista dentro de la navbar
+  const navbarList = document.querySelector('.header-navbar .navbar-items'); 
+  if (!navbarList) {
+    console.error('Navbar list not found!');
+    return;
+  }
+
+  // Crea un nuevo elemento de lista <li> y un enlace <a>
+  const listItem = document.createElement('li');
   const button = document.createElement('a');
-  button.textContent = 'Admin Panel'; 
-  button.addEventListener('click', () => {
-    // Add functionality for admin panel button (e.g., showing admin modal)
-    button.href = 'html/admin.html';
+  
+  // Configura el contenido del botón y el href inicial
+  button.textContent = 'Admin Panel';
+  button.href = '/html/admin.html';  // Configura el enlace directo a la página de admin
+
+  // Añade un escuchador de eventos si necesitas funcionalidad adicional cuando se haga clic
+  button.addEventListener('click', (event) => {
+    // Evita la navegación directa si es necesario manejar lógica adicional
+    event.preventDefault();
+
+    // Aquí puedes agregar cualquier funcionalidad adicional, por ejemplo mostrar un modal de administración
+    console.log('Admin button clicked!');
+    window.location.href = button.href;  // Navega al enlace después de cualquier lógica adicional
   });
-  navbar.appendChild(button);
+
+  // Añade el botón al elemento de lista <li> y luego el <li> a la lista <ul>
+  listItem.appendChild(button);
+  navbarList.appendChild(listItem);
 }
 
 // Función para manejar el registro de la cuenta
@@ -215,8 +239,6 @@ function registerAccount(firstName, lastName, email, password, stateId) {
   })
   .then(data => {
     console.log('Registro exitoso:', data);
-    //const usuarioElement = document.getElementById('auth-container');
-    //usuarioElement.innerHTML = `<div><span id="ewallet-saldo">Saldo: ${}</span><button onclick="openUserProfile()"><img src="images\perfil.svg" alt="Imagen iniciar sección" > Bienvenido, ${firstName}</button></div>`;
     checkIdentityAndLoadData();
     hideRegister();  // Cierra el modal de creación de cuenta
   })
@@ -253,7 +275,7 @@ function logout() {
     })
     .then(() => {
       // Resetear el estado del usuario en el cliente
-      userData = { nombre: null, apellido: null, saldo: null };
+      userData = { nombre: null, apellido: null, saldo: null, admin: false};
       userIdentityKey = null;
 
       // Actualizar los botones/UI

@@ -3,6 +3,8 @@
 <head>
     <title>E-Wallet</title>
     <link rel="stylesheet" type="text/css" href="../styles/ewallet.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/general.css">
     <style>
         /* Styles for h2 */
         h2 {
@@ -17,98 +19,220 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="navbar-list">
-            <h1>Bienvenido a tu E-Wallet, <span id="nombre"></span> <span id="apellido"></span>!</h1>
-            <li class="back-button"><a href="../index.html">Back</a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <div class="parte-superior">
+            <a href="sorteos.html">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
+        </div>
+        <div class="parte-media">
+            <a href="../index.html">
+                <img src="../images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            </a>
+            <a href="sorteos.html">
+                <button>
+                    <img src="../images\boleto.svg" alt="Boleto">
+                    Comprar boletos
+                </button>
+            </a>
+        </div>
+        <div class="parte-inferior">
+            <nav class="header-navbar">
+                <ul class="navbar-items">
+                    <li><a href="sorteos.html">Sorteos  </a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
+                    <li><a href="membresias.html">Membersias de la suerte</a></li>
+                    <li><a href="nuestra_causa.html">Nuestra causa</a></li>
+                    <li><a href="games.html">Juegos</a></li>
+                    <li><a href="ewallet.html">E-wallet</a></li>
+                </ul>
+            </nav>
+            <!-- Botón de Inicio de Sesión y Perfil -->
+            <div id="auth-container">
+                <button id="login-btn" onclick="showLogin()">
+                    <img src="../images\perfil.svg" alt="Imagen iniciar sección" >
+                    Iniciar Sesión
+                </button>
+            </div>
 
-    <p class="balance">Balance: <span id="saldo"></span></p>
+            <!-- Modal de Inicio de Sesión -->
+            <div id="login-modal" class="modal" style="display:none;">
+                <form onsubmit="login(event)">
+                    <h2>Iniciar Sesión</h2>
+                    <label for="login-username">E-mail:</label>
+                    <input type="text" id="login-username" required>
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showRegister()">Crear Cuenta</button>
+                    <button type="button" onclick="hideLogin()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Creación de Cuenta -->
+            <div id="register-modal" class="modal" style="display:none;">
+                <form onsubmit="register(event)">
+                    <h2>Crear Cuenta</h2>
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" required>
+                    <label for="last-name">Apellido:</label>
+                    <input type="text" id="last-name" required>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Contraseña:</label>
+                    <input type="password" id="register-password" required>
+                    <label for="register-state">Estado:</label>
+                    <select id="register-state" required>
+                        <option value="1">Aguascalientes</option>
+                        <option value="2">Baja California</option>
+                        <option value="3">Baja California Sur</option>
+                        <option value="4">Campeche</option>
+                        <option value="5">Chiapas</option>
+                        <option value="6">Chihuahua</option>
+                        <option value="7">Ciudad de México</option>
+                        <option value="8">Coahuila</option>
+                        <option value="9">Colima</option>
+                        <option value="10">Durango</option>
+                        <option value="11">Guanajuato</option>
+                        <option value="12">Guerrero</option>
+                        <option value="13">Hidalgo</option>
+                        <option value="14">Jalisco</option>
+                        <option value="15">México</option>
+                        <option value="16">Michoacán</option>
+                        <option value="17">Morelos</option>
+                        <option value="18">Nayarit</option>
+                        <option value="19">Nuevo León</option>
+                        <option value="20">Oaxaca</option>
+                        <option value="21">Puebla</option>
+                        <option value="22">Querétaro</option>
+                        <option value="23">Quintana Roo</option>
+                        <option value="24">San Luis Potosí</option>
+                        <option value="25">Sinaloa</option>
+                        <option value="26">Sonora</option>
+                        <option value="27">Tabasco</option>
+                        <option value="28">Tamaulipas</option>
+                        <option value="29">Tlaxcala</option>
+                        <option value="30">Veracruz</option>
+                        <option value="31">Yucatán</option>
+                        <option value="32">Zacatecas</option>
+                    </select>
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="hideRegister()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Opciones del Usuario -->
+            <div id="user-options-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Opciones del Usuario</h2>
+                    <button type="button" onclick="editAccount()">Editar Cuenta</button>
+                    <button type="button" onclick="logout()">Cerrar Sesión</button>
+                    <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
+            </div>
+            <!-- Modal Admin -->
+            <div id="admin-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Panel de Administrador</h2>
+                    <button type="button" onclick="showAdminPanel()">Administrar Sorteos</button>
+                    <button type="button" onclick="hideAdmin()">Cerrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <section class="content">
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <h1>Bienvenido a tu E-Wallet, <span id="nombre"></span> <span id="apellido"></span>!</h1>
+                <li class="back-button"><a href="../index.html">Back</a></li>
+            </ul>
+        </nav>
     
-    <button id="depositButton" class="styled-button">Depositar a la e-Wallet</button>
-    <button id="viewPaymentButton" class="styled-button">Ver Métodos de Pago</button>
-    <button id="addPaymentButton" class="styled-button">Añadir Método de Pago</button>
- <!-- Modal window -->
- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="depositForm" onsubmit="depositarSaldo(event)">
-            <h2>Depositar a la e-Wallet</h2>
-            <label for="metodo">Método de Pago:</label>
-            <select id="metodo">
-            </select>
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" min="0">
-            <button type="submit">Confirmar Deposito</button>
-        </form>
-    </div>
-</div>
-
-<!-- Modal window for adding payment method -->
-<div id="addPaymentModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="addPaymentForm" onsubmit="insertarYChecar(event)">
-            <h2>Añadir Método de Pago</h2>
-            <label for="paymentMethodType" class = "label">Tipo de Método de Pago:</label>
-            <select id="paymentMethodType">
-                <option value="credit">Crédito</option>
-                <option value="debit">Débito</option>
-            </select>
-            <label for="Selectnombre"  class = "label">Nombre del Método:</label>
-            <select id="nombre">
-                <option value="Amex">Amex</option>
-                <option value="Visa">Visa</option>
-                <option value="Mastercard">Mastercard</option>
-            </select>
-            <label for="numero_tarjeta" class = "label">Número:</label>
-            <input type="text" id="numero_tarjeta">
-            <label for="paymentMethodExpiration" class = "label">Fecha de Expiración:</label>
-            <select id="mes">
-                <option value="01">Enero</option>
-                <option value="02">Febrero</option>
-                <option value="03">Marzo</option>
-                <option value="04">Abril</option>
-                <option value="05">Mayo</option>
-                <option value="06">Junio</option>
-                <option value="07">Julio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-            </select>
-            <label for="paymentMethodExpirationYear" class = "label">Año de Expiración:</label>
-            <select id="anio">
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-            </select>
-            <label for="paymentMethodCVV" class = "label">CVV:</label>
-            <input type="text" id="paymentMethodCVV">
-            <button type="submit" class="styled-button">Confirmar</button>
-            <!-- cuando se le pique al boton se mandan los datos -->
-        </form>
-    </div>
-</div>
-
-<!-- Modal window for viewing payment methods -->
-<div id="viewPaymentModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Métodos de Pago</h2>
-        <table id="tablaMetodos">
-            <tr>
-                <th>Nombre</th>
-                <th>Número</th>
-            </tr>
-        </table>
-    </div>
+        <p class="balance">Balance: <span id="saldo"></span></p>
+        
+        <button id="depositButton" class="styled-button">Depositar a la e-Wallet</button>
+        <button id="viewPaymentButton" class="styled-button">Ver Métodos de Pago</button>
+        <button id="addPaymentButton" class="styled-button">Añadir Método de Pago</button>
+        <!-- Modal window -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="depositForm" onsubmit="depositarSaldo(event)">
+                    <h2>Depositar a la e-Wallet</h2>
+                    <label for="metodo">Método de Pago:</label>
+                    <select id="metodo">
+                    </select>
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" min="0">
+                    <button type="submit">Confirmar Deposito</button>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Modal window for adding payment method -->
+        <div id="addPaymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="addPaymentForm" onsubmit="insertarYChecar(event)">
+                    <h2>Añadir Método de Pago</h2>
+                    <label for="paymentMethodType" class = "label">Tipo de Método de Pago:</label>
+                    <select id="paymentMethodType">
+                        <option value="credit">Crédito</option>
+                        <option value="debit">Débito</option>
+                    </select>
+                    <label for="Selectnombre"  class = "label">Nombre del Método:</label>
+                    <select id="nombre">
+                        <option value="Amex">Amex</option>
+                        <option value="Visa">Visa</option>
+                        <option value="Mastercard">Mastercard</option>
+                    </select>
+                    <label for="numero_tarjeta" class = "label">Número:</label>
+                    <input type="text" id="numero_tarjeta">
+                    <label for="paymentMethodExpiration" class = "label">Fecha de Expiración:</label>
+                    <select id="mes">
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <label for="paymentMethodExpirationYear" class = "label">Año de Expiración:</label>
+                    <select id="anio">
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                    <label for="paymentMethodCVV" class = "label">CVV:</label>
+                    <input type="text" id="paymentMethodCVV">
+                    <button type="submit" class="styled-button">Confirmar</button>
+                    <!-- cuando se le pique al boton se mandan los datos -->
+                </form>
+            </div>
+        </div>
+    
+        <!-- Modal window for viewing payment methods -->
+        <div id="viewPaymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Métodos de Pago</h2>
+                <table id="tablaMetodos">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Número</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
 
 <footer class="footer">
     <p>&copy; 2024 Future Games</p>

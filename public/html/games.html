@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
     <link rel="stylesheet" href="../styles/general.css">
+    <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/games.css"> 
     <style>
         /* Styles for h2 */
@@ -20,61 +21,185 @@
     </style>
 </head>
 <body>
-    
     <header class="header">
-        <div class="navbar">
-            <nav class="navbar">
-                <ul class="navbar-list">
-                    <h1>Bienvenido a tus juegos, <span id="nombre"></span> <span id="apellido"></span>!</h1>
-                    <li class="back-button"><a href="../index.html">Back</a></li>
+        <div class="parte-superior">
+            <a href="sorteos.html">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
+        </div>
+        <div class="parte-media">
+            <a href="../index.html">
+                <img src="../images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            </a>
+            <a href="sorteos.html">
+                <button>
+                    <img src="../images\boleto.svg" alt="Boleto">
+                    Comprar boletos
+                </button>
+            </a>
+        </div>
+        <div class="parte-inferior">
+            <nav class="header-navbar">
+                <ul class="navbar-items">
+                    <li><a href="sorteos.html">Sorteos  </a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
+                    <li><a href="membresias.html">Membersias de la suerte</a></li>
+                    <li><a href="nuestra_causa.html">Nuestra causa</a></li>
+                    <li><a href="games.html">Juegos</a></li>
+                    <li><a href="ewallet.html">E-wallet</a></li>
                 </ul>
             </nav>
+            <!-- Botón de Inicio de Sesión y Perfil -->
+            <div id="auth-container">
+                <button id="login-btn" onclick="showLogin()">
+                    <img src="../images\perfil.svg" alt="Imagen iniciar sección" >
+                    Iniciar Sesión
+                </button>
+            </div>
+
+            <!-- Modal de Inicio de Sesión -->
+            <div id="login-modal" class="modal" style="display:none;">
+                <form onsubmit="login(event)">
+                    <h2>Iniciar Sesión</h2>
+                    <label for="login-username">E-mail:</label>
+                    <input type="text" id="login-username" required>
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showRegister()">Crear Cuenta</button>
+                    <button type="button" onclick="hideLogin()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Creación de Cuenta -->
+            <div id="register-modal" class="modal" style="display:none;">
+                <form onsubmit="register(event)">
+                    <h2>Crear Cuenta</h2>
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" required>
+                    <label for="last-name">Apellido:</label>
+                    <input type="text" id="last-name" required>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Contraseña:</label>
+                    <input type="password" id="register-password" required>
+                    <label for="register-state">Estado:</label>
+                    <select id="register-state" required>
+                        <option value="1">Aguascalientes</option>
+                        <option value="2">Baja California</option>
+                        <option value="3">Baja California Sur</option>
+                        <option value="4">Campeche</option>
+                        <option value="5">Chiapas</option>
+                        <option value="6">Chihuahua</option>
+                        <option value="7">Ciudad de México</option>
+                        <option value="8">Coahuila</option>
+                        <option value="9">Colima</option>
+                        <option value="10">Durango</option>
+                        <option value="11">Guanajuato</option>
+                        <option value="12">Guerrero</option>
+                        <option value="13">Hidalgo</option>
+                        <option value="14">Jalisco</option>
+                        <option value="15">México</option>
+                        <option value="16">Michoacán</option>
+                        <option value="17">Morelos</option>
+                        <option value="18">Nayarit</option>
+                        <option value="19">Nuevo León</option>
+                        <option value="20">Oaxaca</option>
+                        <option value="21">Puebla</option>
+                        <option value="22">Querétaro</option>
+                        <option value="23">Quintana Roo</option>
+                        <option value="24">San Luis Potosí</option>
+                        <option value="25">Sinaloa</option>
+                        <option value="26">Sonora</option>
+                        <option value="27">Tabasco</option>
+                        <option value="28">Tamaulipas</option>
+                        <option value="29">Tlaxcala</option>
+                        <option value="30">Veracruz</option>
+                        <option value="31">Yucatán</option>
+                        <option value="32">Zacatecas</option>
+                    </select>
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="hideRegister()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Opciones del Usuario -->
+            <div id="user-options-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Opciones del Usuario</h2>
+                    <button type="button" onclick="editAccount()">Editar Cuenta</button>
+                    <button type="button" onclick="logout()">Cerrar Sesión</button>
+                    <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal Admin -->
+            <div id="admin-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Panel de Administrador</h2>
+                    <button type="button" onclick="showAdminPanel()">Administrar Sorteos</button>
+                    <button type="button" onclick="hideAdmin()">Cerrar</button>
+                </form>
+            </div>
         </div>
     </header>
+
+    <section class="content">
+        <section class="welcome-section">
+            <div class="navbar">
+                <nav class="navbar">
+                    <ul class="navbar-list">
+                        <h1>Bienvenido a tus juegos, <span id="nombre"></span> <span id="apellido"></span>!</h1>
+                        <li class="back-button"><a href="../index.html">Back</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+        
+        <main>
+            <h2>Future Games</h2>
     
-    <main>
-        <h2>Future Games</h2>
-
-        <div class="cards-container">
-            <div class="card" data-content="Borrego Tower">
-                <div>
-                    <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
-                    <button id="searchButton">Search localhost:9000</button>
-                    <button onclick="window.location.href = 'EncuentraBorregos5/index.html';">Go to Index</button>
-                    <script src="search.js"></script>
-                </div>
-                <div class="outside-container">
-                    <p class="outside"></p>
-                </div>
-                
-            </div>
-            
-
-            <div class="card" data-content="Borrego Tower">
-                <div>
-                    <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
-                </div>
-                <div class="outside-container">
-                    <p class="outside"></p>
+            <div class="cards-container">
+                <div class="card" data-content="Borrego Tower">
+                    <div>
+                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                        <button id="searchButton">Search localhost:9000</button>
+                        <button onclick="window.location.href = 'EncuentraBorregos5/index.html';">Go to Index</button>
+                        <script src="search.js"></script>
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                    
                 </div>
                 
-            </div>
-
-            <div class="card" data-content="Borrego Tower">
-                <div>
-                    <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+    
+                <div class="card" data-content="Borrego Tower">
+                    <div>
+                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                    
                 </div>
-                <div class="outside-container">
-                    <p class="outside"></p>
+    
+                <div class="card" data-content="Borrego Tower">
+                    <div>
+                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                    
                 </div>
-                
             </div>
         </div>
-    </div>
-    </main>
+        </main>
+    </section>
+
 
     <footer class="footer">
         <p>&copy; 2024 Future Games</p>
+        <script src="../scripts/script.js"></script>
     </footer>
 </body>
 </html>
