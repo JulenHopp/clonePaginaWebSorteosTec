@@ -1,0 +1,58 @@
+.description-boletos{
+    margin-top: 30px;
+    max-width: 1130px;
+    display: flex; /* Flexbox para alinear los boletos */
+    flex-direction: column;
+
+    span{
+        font-size: 14px;
+        font-weight: bold;
+        color: #1B3589;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 30px;
+        font-weight: bold;
+        color: #1B3589;
+        margin-top: 5px;
+    }
+
+    p{
+        font-size: 20px;
+        color: #1B3589;
+        margin: 0;
+    }
+
+    img{
+        height: 65px;
+    };
+}
+
+.boletos-container{
+    display: flex;
+    max-width: 1130px;
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    flex-wrap: wrap;
+}
+
+.boleto{
+    transition: transform 0.8s ease-in-out; /* Transición suave al cambiar el tamaño */
+    background: transparent; /* Hace el boleto invisible */
+    border-radius: 15px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor a una mano para indicar que es interactivo */
+    padding: 0;
+    margin: 10px;
+    border: none;
+}
+
+
+.imagen-boleto{
+    width: 275px; /* Tamaño de la imagen */
+    height: 365px; /* Tamaño de la imagen */
+    border-radius: 15px; /* Esquinas redondeadas */
+}
+
+.boleto:hover{
+    transform: scale(1.02); /* Aumenta el tamaño ligeramente al pasar el cursor */
+}

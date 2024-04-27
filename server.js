@@ -250,6 +250,60 @@ app.post('/registrar-compra-juegos', (req, res) => {
   });
 });
 
+///////////////////////////
+// APIS BUSCABORREGOS /////
+///////////////////////////
+
+// VARIABLES GLOBALES
+let dinero_inicial_buscaBorrego = 10;
+let minas_buscaBorrego = 5;
+const id_buscaborrego = 1;
+
+// Endpoint para obtener las variables globales
+app.get('/buscaBorrego/variables', (req, res) => {
+  res.json({
+      dinero_inicial_buscaBorrego: dinero_inicial_buscaBorrego,
+      minas_buscaBorrego: minas_buscaBorrego
+  });
+});
+
+// Endpoint para actualizar las variables globales
+app.post('/buscaBorrego/variables', (req, res) => {
+  const { dinero, minas } = req.body;
+  if (dinero !== undefined) dinero_inicial_buscaBorrego = dinero;
+  if (minas !== undefined) minas_buscaBorrego = minas;
+  res.status(200).send("Variables actualizadas correctamente");
+});
+
+
+app.post('/buscaBorrego/registrarCompraJuego', (req, res) => {
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey, dinero_inicial_buscaBorrego, id_buscaborrego], (error, results, fields) => {
+    if (error) {
+      console.error('Error en la base de datos:', error);
+      return res.status(500).send('Error al procesar la compra del juego');
+    }
+    res.send('Compra registrada correctamente');
+  });
+});
+
+app.post('buscaBorrego/ingresarGanancia', (req, res) => {
+  const { cantidad } = req.body;
+  
+  if (!cantidad) {
+      return res.status(400).send('La cantidad es necesaria para procesar la transacción.');
+  }
+
+  const sql = 'CALL Registrar_transaccion_real(?, ?, ?)';
+  connection.query(sql, [identityKey, cantidad, "BuscaBorrego"], (error, results, fields) => {
+      if (error) {
+          console.error('Error al ejecutar el procedimiento almacenado:', error);
+          return res.status(500).send('Error interno del servidor');
+      }
+      res.send('Transacción registrada correctamente');
+  });
+});
+
 // Iniciación del servidor en el puerto especificado
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en el puerto ${PORT}`);
