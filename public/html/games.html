@@ -160,7 +160,7 @@
             <div class="cards-container">
                 <div class="card" data-content="Borrego Tower">
                     <div>
-                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                        <img src="/images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
                         <button id="searchButton">Search localhost:9000</button>
                         <button onclick="window.location.href = 'EncuentraBorregos5/index.html';">Go to Index</button>
                         <script src="search.js"></script>
@@ -171,26 +171,71 @@
                     
                 </div>
                 
-    
+                <div class="card" data-content="Busca Borrego">
+                    <div>
+                        <p>Nivel difícil. 5 bombas, 10 pesos</p>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
+                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
+                        <button onclick="openBuscaBorrego(10, 5)">Jugar</button>
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
+
+                <div class="card" data-content="Busca Borrego">
+                    <div>
+                        <p>Nivel medio. 3 bombas, 10 pesos</p>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
+                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
+                        <button onclick="openBuscaBorrego(10, 3)">Jugar</button>
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
+
+                <div class="card" data-content="Busca Borrego">
+                    <div>
+                        <p>Nivel medio. 1 bombas, 5 pesos</p>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
+                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
+                        <button onclick="openBuscaBorrego(5, 1)">Jugar</button>
+                    </div>
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
+
                 <div class="card" data-content="Borrego Tower">
                     <div>
-                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+                        <img src="/images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
                     </div>
                     <div class="outside-container">
                         <p class="outside"></p>
                     </div>
                     
                 </div>
-    
-                <div class="card" data-content="Borrego Tower">
-                    <div>
-                        <img src="images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
+
+                <!-- <div class="card" data-content="Borrego Tower">
+                    <div class="card-upper-part">
+                        <h1>
+                            Busca Borrego
+                        </h1>
                     </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
+                    <div class="card-middle-part">
+                        <span>Nivel difícil</span>
+                        <img src="/images/BorregoTower.jpeg" alt="Imagen Busca Borrego">
                     </div>
-                    
-                </div>
+                    <div class="card-lower-part">
+                        <div>
+                            <img src="" alt="">
+                            <span>Costo: $10</span>
+                        </div>
+                        <div>
+                            <button>Jugar</button>
+                    </div>
+                </div> -->
             </div>
         </div>
         </main>
@@ -200,6 +245,7 @@
     <footer class="footer">
         <p>&copy; 2024 Future Games</p>
         <script src="../scripts/script.js"></script>
+        <script src="../scripts/games.js"></script>
     </footer>
 </body>
 </html>
