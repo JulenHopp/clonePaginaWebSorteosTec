@@ -111,6 +111,7 @@ app.get('/userData', (req, res) => {
 
 // Endpoint GET para obtener el balance de un usuario
 app.get('/saldo', (req, res) => {
+  console.log("Entro a saldo")
   // Check if eWallet exists for the user
   const checkQuery = 'SELECT id_usuario FROM Usuario WHERE email = ?';
   connection.query(checkQuery, [identityKey], (checkError, checkResults) => {
@@ -261,6 +262,7 @@ const id_buscaborrego = 1;
 
 // Endpoint para obtener las variables globales
 app.get('/buscaBorrego/variables', (req, res) => {
+  console.log("Entro a variables");
   res.json({
       dinero_inicial_buscaBorrego: dinero_inicial_buscaBorrego,
       minas_buscaBorrego: minas_buscaBorrego
@@ -277,6 +279,7 @@ app.post('/buscaBorrego/variables', (req, res) => {
 
 
 app.post('/buscaBorrego/registrarCompraJuego', (req, res) => {
+  console.log("Entro a registrarCompraJuego");
   const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
   connection.query(sql, [identityKey, dinero_inicial_buscaBorrego, id_buscaborrego], (error, results, fields) => {
     if (error) {
@@ -287,7 +290,8 @@ app.post('/buscaBorrego/registrarCompraJuego', (req, res) => {
   });
 });
 
-app.post('buscaBorrego/ingresarGanancia', (req, res) => {
+app.post('/buscaBorrego/ingresarGanancia', (req, res) => {
+  console.log("Entro a ingresarGanancia");
   const { cantidad } = req.body;
   
   if (!cantidad) {
@@ -303,6 +307,10 @@ app.post('buscaBorrego/ingresarGanancia', (req, res) => {
       res.send('Transacción registrada correctamente');
   });
 });
+
+///////////////////////////
+// COSAS DEL SERVIDOR /////
+///////////////////////////
 
 // Iniciación del servidor en el puerto especificado
 app.listen(PORT, () => {

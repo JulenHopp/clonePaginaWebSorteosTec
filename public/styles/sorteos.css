@@ -54,5 +54,5 @@
 }
 
 .boleto:hover{
-    transform: scale(1.02); /* Aumenta el tamaño ligeramente al pasar el cursor */
+    transform: scale(1.04); /* Aumenta el tamaño ligeramente al pasar el cursor */
 }
