@@ -9,7 +9,7 @@ const app = express();
 const PORT = 3000;
 
 //creacion de vairable de sesion
-let identityKey = 'email';
+let identityKey = null;
 
 // Configuración de la conexión a la base de datos MySQL
 const connection = mysql.createConnection({
@@ -40,6 +40,19 @@ app.use((err, req, res, next) => {
   console.error("Error detectado:", err);
   res.status(500).send("Ocurrió un error en el servidor");
 });
+
+app.get('/get-identityKey', (req, res) => {
+  if (!identityKey) {
+    return res.status(200).json({ identityKey: null, message: 'No identity key set' });
+  }
+  res.status(200).json({ identityKey: identityKey, message: 'Identity key retrieved successfully' });
+});
+
+app.post('/logout', (req, res) => {
+  identityKey = null;  // Resetea la identityKey
+  res.status(200).json({ message: 'Logout successful' });
+});
+
 
 // Ruta raíz que sirve la página principal desde el directorio 'public'
 app.get("/", (req, res) => {
@@ -298,8 +311,8 @@ app.post('/buscaBorrego/ingresarGanancia', (req, res) => {
       return res.status(400).send('La cantidad es necesaria para procesar la transacción.');
   }
 
-  const sql = 'CALL Registrar_transaccion_real(?, ?, ?)';
-  connection.query(sql, [identityKey, cantidad, "BuscaBorrego"], (error, results, fields) => {
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey,  -1 * cantidad, id_buscaborrego], (error, results, fields) => {
       if (error) {
           console.error('Error al ejecutar el procedimiento almacenado:', error);
           return res.status(500).send('Error interno del servidor');
@@ -307,7 +320,6 @@ app.post('/buscaBorrego/ingresarGanancia', (req, res) => {
       res.send('Transacción registrada correctamente');
   });
 });
-
 ///////////////////////////
 // COSAS DEL SERVIDOR /////
 ///////////////////////////

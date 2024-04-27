@@ -1,3 +1,74 @@
+let userData = {
+  nombre: null,
+  apellido: null,
+  saldo: null
+};
+
+function updateButtons() {
+  const usuarioElement = document.getElementById('auth-container');
+
+  if (!userIdentityKey || !userData.nombre) {
+      // Si identityKey es nula o no tenemos nombre, se muestra el botón de iniciar sesión
+      usuarioElement.innerHTML = `
+        <button id="login-btn" onclick="showLogin()">
+          <img src="/images/perfil.svg" alt="Imagen iniciar sección">Iniciar Sesión
+        </button>`;
+  } else {
+      // Si identityKey y userData están completos, muestra la interfaz de usuario logueada
+      usuarioElement.innerHTML = `
+        <div id="userLogged-container">
+          <span id="ewallet-saldo">Saldo: ${userData.saldo}</span>
+          <button onclick="openUserProfile()">
+            <img src="/images/perfil.svg" alt="Imagen iniciar sección"> Bienvenido, ${userData.nombre}
+          </button>
+        </div>`;
+  }
+}
+// Función principal para verificar la identityKey y actualizar la interfaz de usuario
+function checkIdentityAndLoadData() {
+  fetch('/get-identityKey')
+    .then(response => response.json())
+    .then(data => {
+      const usuarioElement = document.getElementById('auth-container');
+      if (!data.identityKey) {
+        // Si identityKey es nula, se muestra el botón de iniciar sesión
+        usuarioElement.innerHTML = `
+          <button id="login-btn" onclick="showLogin()">
+            <img src="/images/perfil.svg" alt="Imagen iniciar sección">Iniciar Sesión
+          </button>`;
+      } else {
+        // Si identityKey no es nula, se hacen fetch a /userData y /saldo
+        Promise.all([
+          fetch('/userData').then(response => response.json()),
+          fetch('/saldo').then(response => response.json())
+        ]).then(([userDataResponse, saldoResponse]) => {
+          // Actualiza userData con los datos recibidos
+          userData = {
+            nombre: userDataResponse[0].nombre,
+            apellido: userDataResponse[0].apellido,
+            saldo: saldoResponse.saldo
+          };
+          // Actualiza la interfaz de usuario con los datos del usuario
+          usuarioElement.innerHTML = `
+            <div id="userLogged-container">
+              <span id="ewallet-saldo">Saldo: ${userData.saldo}</span>
+              <button onclick="openUserProfile()">
+                <img src="/images/perfil.svg" alt="Imagen iniciar sección"> Bienvenido, ${userData.nombre}
+              </button>
+            </div>`;
+        }).catch(error => {
+          console.error('Error fetching user data or saldo:', error);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching identityKey:', error);
+    });
+}
+
+// Ejecuta la función principal al cargar la página o según sea necesario
+document.addEventListener('DOMContentLoaded', checkIdentityAndLoadData);
+
 // Funciones para mostrar y ocultar los modales
 function showLogin() {
   document.getElementById('login-modal').style.display = 'block';
@@ -46,8 +117,9 @@ fetch('/authenticate', {
 })
 .then(data => {
   console.log('Autenticación exitosa:', data);
-  const usuarioElement = document.getElementById('auth-container');
-  usuarioElement.innerHTML = `<button onclick="openUserProfile()">Bienvenido, ${data.firstName}</button>`;
+  //const usuarioElement = document.getElementById('auth-container');
+  //usuarioElement.innerHTML = `<button onclick="openUserProfile()">Bienvenido, ${data.firstName}</button>`;
+  checkIdentityAndLoadData();
   console.log(data.admins);
   if (data.admins == 1) {
     document.getElementById('admin-modal').style.display = 'block';
@@ -143,8 +215,9 @@ function registerAccount(firstName, lastName, email, password, stateId) {
   })
   .then(data => {
     console.log('Registro exitoso:', data);
-    const usuarioElement = document.getElementById('auth-container');
-    usuarioElement.innerHTML = `<button onclick="openUserProfile()"><img src="images\perfil.svg" alt="Imagen iniciar sección" > Bienvenido, ${firstName}</button>`;
+    //const usuarioElement = document.getElementById('auth-container');
+    //usuarioElement.innerHTML = `<div><span id="ewallet-saldo">Saldo: ${}</span><button onclick="openUserProfile()"><img src="images\perfil.svg" alt="Imagen iniciar sección" > Bienvenido, ${firstName}</button></div>`;
+    checkIdentityAndLoadData();
     hideRegister();  // Cierra el modal de creación de cuenta
   })
   .catch(error => {
@@ -168,12 +241,33 @@ function editAccount() {
 }
 
 function logout() {
-  // Función para manejar el cierre de sesión del usuario
   console.log('Cerrar sesión');
-  // Aquí implementarías la lógica para cerrar la sesión, como limpiar cookies o localStorage
-  window.location.href = '/';  // Redireccionar al usuario a la página de inicio de sesión
-  hideUserOptions();  // Ocultar el modal de opciones del usuario
+
+  // Enviar una petición al servidor para limpiar identityKey
+  fetch('/logout', { method: 'POST' })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to logout');
+      }
+      return response.json();
+    })
+    .then(() => {
+      // Resetear el estado del usuario en el cliente
+      userData = { nombre: null, apellido: null, saldo: null };
+      userIdentityKey = null;
+
+      // Actualizar los botones/UI
+      updateButtons();
+
+      // Redireccionar al usuario a la página de inicio
+      window.location.href = '/';
+    })
+    .catch(error => {
+      console.error('Error during logout:', error);
+    });
 }
+
+
 
 function hideUserOptions() {
   document.getElementById('user-options-modal').style.display = 'none';  // Oculta el modal de opciones del usuario

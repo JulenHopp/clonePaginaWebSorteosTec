@@ -170,6 +170,42 @@ body {
     margin-right: 10px; /* Espacio entre la imagen y el texto */
 }
 
+/* Estilos para el contenedor del botón de usuario y saldo */
+#userLogged-container {
+    display: flex; /* Asegura que los elementos hijos estén en línea */
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    justify-content: flex-start; /* Alinea los elementos a la izquierda del contenedor */
+    gap: 20px; /* Espacio entre los elementos hijos */
+}
+
+#userLogged-container span {
+    background-color: #f8f9fa; /* Color de fondo claro para el saldo */
+    color: #343a40; /* Color de texto oscuro para mejor legibilidad */
+    border: 1px solid #ced4da; /* Borde sutil */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño de fuente */
+    font-weight: bold; /* Fuente en negrita */
+}
+
+#userLogged-container button {
+    background-color: #007BFF; /* Color de fondo para el botón de perfil */
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 25px; /* Bordes más redondeados */
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize; /* Opción estilística para capitalizar */
+}
+
+#userLogged-container button img {
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+
 /* Estilos generales para los modales */
 .modal {
     display: none;
