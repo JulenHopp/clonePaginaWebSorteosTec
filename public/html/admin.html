@@ -4,58 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Mockup</title>
-    <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="styles/general.css">
+    <link rel="stylesheet" type="text/css" href="/styles/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/styles/general.css">
+    <link rel="stylesheet" type="text/css" href="/styles/header.css">
 </head>
 <body>
     <header class="header">
         <div class="parte-superior">
-            <h1>Dashboard</h1>
+            <a href="sorteos.html">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
         </div>
-        <nav class="header-navbar">
-            <ul class="navbar-items">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Settings</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="summary">
-            <h2>Summary</h2>
-            <div class="summary-cards">
-                <div class="card">
-                    <h3>Total Users</h3>
-                    <p>1,234</p>
-                </div>
-                <div class="card">
-                    <h3>Revenue</h3>
-                    <p>$10,345</p>
-                </div>
-                <div class="card">
-                    <h3>Page Views</h3>
-                    <p>56,789</p>
-                </div>
+        <div class="parte-media">
+            <a href="../index.html">
+                <img src="../images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            </a>
+            <a href="sorteos.html">
+                <button>
+                    <img src="../images\boleto.svg" alt="Boleto">
+                    Comprar boletos
+                </button>
+            </a>
+        </div>
+        <div class="parte-inferior">
+            <nav class="header-navbar">
+                <ul class="navbar-items">
+                    <li><a href="sorteos.html">Sorteos  </a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
+                    <li><a href="membresias.html">Membersias de la suerte</a></li>
+                    <li><a href="nuestra_causa.html">Nuestra causa</a></li>
+                    <li><a href="games.html">Juegos</a></li>
+                    <li><a href="ewallet.html">E-wallet</a></li>
+                </ul>
+            </nav>
+            <!-- Botón de Inicio de Sesión y Perfil -->
+            <div id="auth-container">
+                <button id="login-btn" onclick="showLogin()">
+                    <img src="../images\perfil.svg" alt="Imagen iniciar sección" >
+                    Iniciar Sesión
+                </button>
             </div>
-        </section>
-        <section class="charts">
-            <h2>Charts</h2>
-            <!-- Placeholder for charts -->
-             <iframe width="800" height="600" src="https://lookerstudio.google.com/embed/reporting/10ddccc4-4595-4a97-954a-a511a96548d8/page/icWxD" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>        <section class="activity">
 
-        </section>
-        <section class="activity">
-            <h2>Activity</h2>
-            <ul>
-                <li>User registration</li>
-                <li>Game generateed $$</li>
-                <li>Payment processed</li>
-                <li>...</li>
-            </ul>
-        </section>
-    </main>
+            <!-- Modal de Inicio de Sesión -->
+            <div id="login-modal" class="modal" style="display:none;">
+                <form onsubmit="login(event)">
+                    <h2>Iniciar Sesión</h2>
+                    <label for="login-username">E-mail:</label>
+                    <input type="text" id="login-username" required>
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showRegister()">Crear Cuenta</button>
+                    <button type="button" onclick="hideLogin()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Creación de Cuenta -->
+            <div id="register-modal" class="modal" style="display:none;">
+                <form onsubmit="register(event)">
+                    <h2>Crear Cuenta</h2>
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" required>
+                    <label for="last-name">Apellido:</label>
+                    <input type="text" id="last-name" required>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                    <label for="register-password">Contraseña:</label>
+                    <input type="password" id="register-password" required>
+                    <label for="register-state">Estado:</label>
+                    <select id="register-state" required>
+                        <option value="1">Aguascalientes</option>
+                        <option value="2">Baja California</option>
+                        <option value="3">Baja California Sur</option>
+                        <option value="4">Campeche</option>
+                        <option value="5">Chiapas</option>
+                        <option value="6">Chihuahua</option>
+                        <option value="7">Ciudad de México</option>
+                        <option value="8">Coahuila</option>
+                        <option value="9">Colima</option>
+                        <option value="10">Durango</option>
+                        <option value="11">Guanajuato</option>
+                        <option value="12">Guerrero</option>
+                        <option value="13">Hidalgo</option>
+                        <option value="14">Jalisco</option>
+                        <option value="15">México</option>
+                        <option value="16">Michoacán</option>
+                        <option value="17">Morelos</option>
+                        <option value="18">Nayarit</option>
+                        <option value="19">Nuevo León</option>
+                        <option value="20">Oaxaca</option>
+                        <option value="21">Puebla</option>
+                        <option value="22">Querétaro</option>
+                        <option value="23">Quintana Roo</option>
+                        <option value="24">San Luis Potosí</option>
+                        <option value="25">Sinaloa</option>
+                        <option value="26">Sonora</option>
+                        <option value="27">Tabasco</option>
+                        <option value="28">Tamaulipas</option>
+                        <option value="29">Tlaxcala</option>
+                        <option value="30">Veracruz</option>
+                        <option value="31">Yucatán</option>
+                        <option value="32">Zacatecas</option>
+                    </select>
+                    <button type="submit">Registrar</button>
+                    <button type="button" onclick="hideRegister()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal de Opciones del Usuario -->
+            <div id="user-options-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Opciones del Usuario</h2>
+                    <button type="button" onclick="editAccount()">Editar Cuenta</button>
+                    <button type="button" onclick="logout()">Cerrar Sesión</button>
+                    <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
+            </div>
+            <!-- Modal Admin -->
+            <div id="admin-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Panel de Administrador</h2>
+                    <button type="button" onclick="showAdminPanel()">Administrar Sorteos</button>
+                    <button type="button" onclick="hideAdmin()">Cerrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section class="content">
+        <section class="dashboard-header">
+            <div class="dashboard-parte-superior">
+                <h1>Dashboard</h1>
+            </div>
+            <nav class="dashboard-header-navbar">
+                <ul class="dashboard-navbar-items">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </setion>
+        <main>
+            <section class="summary">
+                <h2>Summary</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3>Total Users</h3>
+                        <p>1,234</p>
+                    </div>
+                    <div class="card">
+                        <h3>Revenue</h3>
+                        <p>$10,345</p>
+                    </div>
+                    <div class="card">
+                        <h3>Page Views</h3>
+                        <p>56,789</p>
+                    </div>
+                </div>
+            </section>
+            <section class="charts">
+                <h2>Charts</h2>
+                <!-- Placeholder for charts -->
+                 <iframe width="800" height="600" src="https://lookerstudio.google.com/embed/reporting/10ddccc4-4595-4a97-954a-a511a96548d8/page/icWxD" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>        <section class="activity">
+    
+            </section>
+            <section class="activity">
+                <h2>Activity</h2>
+                <ul>
+                    <li>User registration</li>
+                    <li>Game generateed $$</li>
+                    <li>Payment processed</li>
+                    <li>...</li>
+                </ul>
+            </section>
+        </main>
+
+    </section>
     <footer>
         <p>&copy; Dashboard Mockup</p>
+        <script src="../scripts/script.js"></script>
     </footer>
 </body>
 </html>

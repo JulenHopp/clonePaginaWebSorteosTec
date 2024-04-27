@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteos Tec</title>
-    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/sorteos.css">
 </head>
@@ -31,8 +31,8 @@
                     <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
                     <li><a href="membresias.html">Membersias de la suerte</a></li>
                     <li><a href="nuestra_causa.html">Nuestra causa</a></li>
-                    <li><a href="../games.html">Juegos</a></li>
-                    <li><a href="../ewallet.html">E-wallet</a></li>
+                    <li><a href="games.html">Juegos</a></li>
+                    <li><a href="ewallet.html">E-wallet</a></li>
                 </ul>
             </nav>
             <!-- Botón de Inicio de Sesión y Perfil -->
@@ -116,6 +116,15 @@
                     <button type="button" onclick="editAccount()">Editar Cuenta</button>
                     <button type="button" onclick="logout()">Cerrar Sesión</button>
                     <button type="button" onclick="hideUserOptions()">Cerrar</button>
+                </form>
+            </div>
+
+            <!-- Modal Admin -->
+            <div id="admin-modal" class="modal" style="display:none;">
+                <form>
+                    <h2>Panel de Administrador</h2>
+                    <button type="button" onclick="showAdminPanel()">Administrar Sorteos</button>
+                    <button type="button" onclick="hideAdmin()">Cerrar</button>
                 </form>
             </div>
         </div>

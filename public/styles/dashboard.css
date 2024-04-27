@@ -1,48 +1,46 @@
 /* dashboard.css */
-
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+.content {
+    padding: 150px 0 0 0;
 }
 
-header {
+
+/* Global styles */
+.dashboard-header {
     background-color: #1B3589;
     color: white;
     padding: 10px 0;
     text-align: center;
 }
 
-header h1 {
+.dashboard-header h1 {
     margin: 0;
 }
 
-nav ul {
+.dashboard-header-navbar ul {
     list-style-type: none;
     padding: 0;
 }
 
-nav ul li {
+.dashboard-header-navbar ul li {
     display: inline;
     margin: 0 10px;
 }
 
-nav ul li a {
+.dashboard-header-navbar ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
-main {
+.content main {
     padding: 20px;
 }
 
-section {
+.content section {
     margin-bottom: 30px;
 }
 
-h2 {
+.content h2 {
     color: #1B3589;
 }
 

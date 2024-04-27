@@ -149,6 +149,7 @@ function depositarSaldo(event) {
 }
 
 function depositar(cantidad, metodo) {
+    console.log("entro a depositar 2")
     const deposito = {
         cantidad: cantidad,
         metodo: metodo

@@ -224,6 +224,7 @@ app.post('/editar-cuenta', (req, res) => {
 
 // Endpoint POST para registrar una transacción real
 app.post('/registrar-transaccion-real', (req, res) => {
+  console.log("Entro a registrar transaccion real")
   const { usuario_email, cantidad, metodo } = req.body;
 
   connection.query('CALL Registrar_transaccion_real(?, ?, ?)', [identityKey, cantidad, metodo], (error, results, fields) => {
@@ -322,6 +323,7 @@ app.post('/buscaBorrego/ingresarGanancia', (req, res) => {
 });
 
 ///////////////////////////
+<<<<<<< HEAD
 // APIS BORREGO TOWER /////
 ///////////////////////////
 let dinero_inicial_borregoTower = 10;
@@ -360,6 +362,9 @@ app.post('/borregoTower/ingresarGanancia', (req, res) => {
 
 ///////////////////////////
 // APIS BORREGO JUMP /////
+=======
+// APIS CUPONES /////
+>>>>>>> julenProducion
 ///////////////////////////
 
 ///////////////////////////
