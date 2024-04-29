@@ -11,7 +11,7 @@ function accionBoleto(numeroBoleto) {
         body: JSON.stringify(postData)
     };
 
-    fetch('/sorteos/registrar-compra-cupones', fetchOptions)
+    fetch('/registrar-compra-cupones', fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('La solicitud falló con el estado: ' + response.statusText);

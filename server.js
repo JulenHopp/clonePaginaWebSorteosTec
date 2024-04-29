@@ -240,7 +240,7 @@ app.post('/registrar-transaccion-real', (req, res) => {
 app.post('/registrar-compra-cupones', (req, res) => {
   const { usuario_email, id_cupon } = req.body;
 
-  connection.query('CALL Registrar_compra_cupones(?, ?)', [usuario_email, id_cupon], (error, results, fields) => {
+  connection.query('CALL Registrar_compra_cupones(?, ?)', [identityKey, id_cupon], (error, results, fields) => {
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       return res.status(500).json({ error: 'Error interno del servidor' });
@@ -254,7 +254,7 @@ app.post('/registrar-compra-cupones', (req, res) => {
 app.post('/registrar-compra-juegos', (req, res) => {
   const { usuario_email, costo, id_juego } = req.body;
 
-  connection.query('CALL Registrar_compra_juegos(?, ?, ?)', [usuario_email, costo, id_juego], (error, results, fields) => {
+  connection.query('CALL Registrar_compra_juegos(?, ?, ?)', [identityKey, costo, id_juego], (error, results, fields) => {
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       return res.status(500).json({ error: 'Error interno del servidor' });
