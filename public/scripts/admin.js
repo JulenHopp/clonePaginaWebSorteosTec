@@ -1,19 +1,22 @@
 //fetch makeAdmin
 function upgradeAdmin(event) {
-    event.preventDefault();
     const email = event.target.querySelector('#admin-email').value;
-    const postData = {
+    upgradeAdminFetch(email);
+}
+
+function upgradeAdminFetch(email) {
+    const data = {
         email: email
     };
-    const fetchOptions = {
+
+    fetch('/makeAdmin', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postData)
-    };
+        body: JSON.stringify(email)
+    })
 
-    fetch('/makeAdmin', fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al hacer admin');
