@@ -25,57 +25,8 @@ function updateButtons() {
         </div>`;
   }
 }
-/*
-// Función principal para verificar la identityKey y actualizar la interfaz de usuario
-function checkIdentityAndLoadData() {
-  fetch('/get-identityKey')
-    .then(response => response.json())
-    .then(data => {
-      const usuarioElement = document.getElementById('auth-container');
-      if (!data.identityKey) {
-        // Si identityKey es nula, se muestra el botón de iniciar sesión
-        usuarioElement.innerHTML = `
-          <button id="login-btn" onclick="showLogin()">
-            <img src="/images/perfil.svg" alt="Imagen iniciar sección">Iniciar Sesión
-          </button>`;
-      } else {
-        // Si identityKey no es nula, se hacen fetch a /userData y /saldo
-        Promise.all([
-          fetch('/userData').then(response => response.json()),
-          fetch('/saldo').then(response => response.json())
-        ]).then(([userDataResponse, saldoResponse]) => {
-          // Actualiza userData con los datos recibidos
-          userData = {
-            nombre: userDataResponse[0].nombre,
-            apellido: userDataResponse[0].apellido,
-            saldo: saldoResponse.saldo,
-            admin: userDataResponse[0].admins,
-          };
-          // Actualiza la interfaz de usuario con los datos del usuario
-          usuarioElement.innerHTML = `
-            <div id="userLogged-container">
-              <span id="ewallet-saldo">Saldo: ${userData.saldo}</span>
-              <button onclick="openUserProfile()">
-                <img src="/images/perfil.svg" alt="Imagen iniciar sección"> Bienvenido, ${userData.nombre}
-              </button>
-            </div>`;
-          console.log('Datos del usuario:', userData.admin);
-          if(userData.admin == 1){
-            createAdminButton();
-          }
-        }).catch(error => {
-          console.error('Error fetching user data or saldo:', error);
-        });
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching identityKey:', error);
-    });
-}
 
-// Ejecuta la función principal al cargar la página o según sea necesario
-document.addEventListener('DOMContentLoaded', checkIdentityAndLoadData);
-*/
+
 
 // Función para actualizar el saldo
 function updateSaldo() {
@@ -142,6 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Actualizar el saldo cada 3 segundos (3000 milisegundos)
   setInterval(updateSaldo, 300);
 });
+
+function checkIdentityAndRedirect(targetUrl) {
+  fetch('/get-identityKey')
+  .then(response => response.json())
+  .then(data => {
+      if (data.identityKey) {
+          window.location.href = targetUrl;
+      } else {
+          alert('Por favor, inicie sesión para acceder a esta página.');
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Ha ocurrido un error al verificar la información de usuario.');
+  });
+}
 
 // Funciones para mostrar y ocultar los modales
 function showLogin() {

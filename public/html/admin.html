@@ -11,15 +11,15 @@
 <body>
     <header class="header">
         <div class="parte-superior">
-            <a href="sorteos.html">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
+            <a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\sorteos.html')">Más efectivo, más especial 🍀 por solo $150 podrías ganar hasta $780,000</a>
         </div>
         <div class="parte-media">
-            <a href="../index.html">
-                <img src="../images\Principal-Blanco_5.png" alt="Logo sorteos tec">
+            <a href="\index.html">
+                <img src="\images\Principal-Blanco_5.png" alt="Logo sorteos tec">
             </a>
-            <a href="sorteos.html">
+            <a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\sorteos.html')">
                 <button>
-                    <img src="../images\boleto.svg" alt="Boleto">
+                    <img src="\images\boleto.svg" alt="Boleto">
                     Comprar boletos
                 </button>
             </a>
@@ -27,18 +27,18 @@
         <div class="parte-inferior">
             <nav class="header-navbar">
                 <ul class="navbar-items">
-                    <li><a href="sorteos.html">Sorteos  </a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
-                    <li><a href="consulta_ganadores.html">Consulta ganadores</a></li>
-                    <li><a href="membresias.html">Membersias de la suerte</a></li>
-                    <li><a href="nuestra_causa.html">Nuestra causa</a></li>
-                    <li><a href="games.html">Juegos</a></li>
-                    <li><a href="ewallet.html">E-wallet</a></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\sorteos.html')">Sorteos</a><img src="../images/arrow-down.svg" alt="flechita hacia abajo"></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\consulta_ganadores.html')">Consulta ganadores</a></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\membresias.html')">Membersias de la suerte</a></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\nuestra_causa.html')">Nuestra causa</a></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\games.html')">Juegos</a></li>
+                    <li><a href="javascript:void(0);" onclick="checkIdentityAndRedirect('\\html\\ewallet.html')">E-wallet</a></li>
                 </ul>
             </nav>
             <!-- Botón de Inicio de Sesión y Perfil -->
             <div id="auth-container">
                 <button id="login-btn" onclick="showLogin()">
-                    <img src="../images\perfil.svg" alt="Imagen iniciar sección" >
+                    <img src="images\perfil.svg" alt="Imagen iniciar sección" >
                     Iniciar Sesión
                 </button>
             </div>
@@ -113,11 +113,14 @@
             <div id="user-options-modal" class="modal" style="display:none;">
                 <form>
                     <h2>Opciones del Usuario</h2>
+                    <!-- calls function to create a Data Analytics button if isAdmin-->
+                    
                     <button type="button" onclick="editAccount()">Editar Cuenta</button>
                     <button type="button" onclick="logout()">Cerrar Sesión</button>
                     <button type="button" onclick="hideUserOptions()">Cerrar</button>
                 </form>
             </div>
+
             <!-- Modal Admin -->
             <div id="admin-modal" class="modal" style="display:none;">
                 <form>
@@ -126,6 +129,7 @@
                     <button type="button" onclick="hideAdmin()">Cerrar</button>
                 </form>
             </div>
+
             <!-- Modal de Edición de Cuenta -->
             <div id="edit-account-modal" class="modal" style="display:none;">
                 <form onsubmit="updateAccount(event)">
