@@ -143,107 +143,111 @@
     </header>
 
     <section class="content">
-        <section class="welcome-section">
-            <div class="navbar">
-                <nav class="navbar">
-                    <ul class="navbar-list">
-                        <h1>Bienvenido a tus juegos, <span id="nombre"></span> <span id="apellido"></span>!</h1>
-                        <li class="back-button"><a href="../index.html">Back</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
-        
         <main>
             <h2>Future Games</h2>
     
             <div class="cards-container">
-                <div class="card" data-content="Borrego Tower">
-                    <div>
-                        <img src="/images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
-                        <button id="searchButton">Search localhost:9000</button>
-                        <button onclick="window.location.href = 'EncuentraBorregos5/index.html';">Go to Index</button>
-                        <script src="search.js"></script>
-                    </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
-                    </div>
-                    
-                </div>
-                
                 <div class="card" data-content="Busca Borrego">
+                    <button class="button-sorteos-tec" onclick="openBuscaBorrego(10, 5)"> 
                     <div>
-                        <p>Nivel difícil. 5 bombas, 10 pesos</p>
-                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
-                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
-                        <button onclick="openBuscaBorrego(10, 5)">Jugar</button>
-                    </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
-                    </div>
-                </div>
-
-                <div class="card" data-content="Busca Borrego">
-                    <div>
-                        <p>Nivel medio. 3 bombas, 10 pesos</p>
-                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
-                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
-                        <button onclick="openBuscaBorrego(10, 3)">Jugar</button>
-                    </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
-                    </div>
-                </div>
-
-                <div class="card" data-content="Busca Borrego">
-                    <div>
-                        <p>Nivel medio. 1 bombas, 5 pesos</p>
-                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">
-                        <!-- <button onclick="window.location.href = '/EncuentraBorrego/index.html'">Jugar</button> -->
-                        <button onclick="openBuscaBorrego(5, 1)">Jugar</button>
-                    </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
-                    </div>
-                </div>
-
-                <div class="card" data-content="Borrego Tower">
-                    <div>
-                        <img src="/images/BorregoTower.jpeg" alt="asdfasdfasdfadsf">
-                    </div>
-                    <div class="outside-container">
-                        <p class="outside"></p>
-                    </div>
-                    
-                </div>
-
-                <!-- <div class="card" data-content="Borrego Tower">
-                    <div class="card-upper-part">
-                        <h1>
-                            Busca Borrego
-                        </h1>
-                    </div>
-                    <div class="card-middle-part">
-                        <span>Nivel difícil</span>
-                        <img src="/images/BorregoTower.jpeg" alt="Imagen Busca Borrego">
-                    </div>
-                    <div class="card-lower-part">
-                        <div>
-                            <img src="" alt="">
-                            <span>Costo: $10</span>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">  
+                    </button>   
+                        <div class="textbox">
+                            <table>
+                                <tr>
+                                    <th colspan="2">Detalles del Juego</th>
+                                </tr>
+                                <tr>
+                                    <td>Nivel:</td>
+                                    <td>Difícil</td>
+                                </tr>
+                                <tr>
+                                    <td>Bombas:</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Costo:</td>
+                                    <td>10 pesos</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div>
-                            <button>Jugar</button>
                     </div>
-                </div> -->
+                
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
+
+                <div class="card" data-content="Busca Borrego">
+                    <button class="button-sorteos-tec" onclick="openBuscaBorrego(10, 5)"> 
+                    <div>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">  
+                    </button>   
+                        <div class="textbox">
+                            <table>
+                                <tr>
+                                    <th colspan="2">Detalles del Juego</th>
+                                </tr>
+                                <tr>
+                                    <td>Nivel:</td>
+                                    <td>Difícil</td>
+                                </tr>
+                                <tr>
+                                    <td>Bombas:</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Costo:</td>
+                                    <td>10 pesos</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
+
+                <div class="card" data-content="Busca Borrego">
+                    <button class="button-sorteos-tec" onclick="openBuscaBorrego(10, 5)"> 
+                    <div>
+                        <img src="/images/BorregoTower.jpeg" alt="imagenJuego">  
+                    </button>   
+                        <div class="textbox">
+                            <table>
+                                <tr>
+                                    <th colspan="2">Detalles del Juego</th>
+                                </tr>
+                                <tr>
+                                    <td>Nivel:</td>
+                                    <td>Difícil</td>
+                                </tr>
+                                <tr>
+                                    <td>Bombas:</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Costo:</td>
+                                    <td>10 pesos</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                
+                    <div class="outside-container">
+                        <p class="outside"></p>
+                    </div>
+                </div>
             </div>
         </div>
         </main>
     </section>
 
 
+        
+
     <footer class="footer">
-        <p>&copy; 2024 Future Games</p>
         <script src="../scripts/script.js"></script>
         <script src="../scripts/games.js"></script>
     </footer>
