@@ -25,6 +25,7 @@ function updateButtons() {
         </div>`;
   }
 }
+/*
 // Función principal para verificar la identityKey y actualizar la interfaz de usuario
 function checkIdentityAndLoadData() {
   fetch('/get-identityKey')
@@ -74,6 +75,73 @@ function checkIdentityAndLoadData() {
 
 // Ejecuta la función principal al cargar la página o según sea necesario
 document.addEventListener('DOMContentLoaded', checkIdentityAndLoadData);
+*/
+
+// Función para actualizar el saldo
+function updateSaldo() {
+  fetch('/saldo')
+    .then(response => response.json())
+    .then(saldoResponse => {
+      const saldoElement = document.getElementById('ewallet-saldo');
+      saldoElement.textContent = `Saldo: ${saldoResponse.saldo}`;
+    })
+    .catch(error => {
+      console.error('Error fetching saldo:', error);
+    });
+}
+
+// Función principal para verificar la identityKey y actualizar la interfaz de usuario
+function checkIdentityAndLoadData() {
+  fetch('/get-identityKey')
+    .then(response => response.json())
+    .then(data => {
+      const usuarioElement = document.getElementById('auth-container');
+      if (!data.identityKey) {
+        // Si identityKey es nula, se muestra el botón de iniciar sesión
+        usuarioElement.innerHTML = `
+          <button id="login-btn" onclick="showLogin()">
+            <img src="/images/perfil.svg" alt="Imagen iniciar sección">Iniciar Sesión
+          </button>`;
+      } else {
+        // Si identityKey no es nula, se hacen fetch a /userData y se actualiza el saldo
+        Promise.all([
+          fetch('/userData').then(response => response.json()),
+          updateSaldo() // Actualizar el saldo inicialmente
+        ]).then(([userDataResponse]) => {
+          // Actualiza userData con los datos recibidos
+          userData = {
+            nombre: userDataResponse[0].nombre,
+            apellido: userDataResponse[0].apellido,
+            admin: userDataResponse[0].admins,
+          };
+          // Actualiza la interfaz de usuario con los datos del usuario
+          usuarioElement.innerHTML = `
+            <div id="userLogged-container">
+              <span id="ewallet-saldo">Saldo: ${userData.saldo}</span>
+              <button onclick="openUserProfile()">
+                <img src="/images/perfil.svg" alt="Imagen iniciar sección"> Bienvenido, ${userData.nombre}
+              </button>
+            </div>`;
+          console.log('Datos del usuario:', userData.admin);
+          if(userData.admin == 1){
+            createAdminButton();
+          }
+        }).catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching identityKey:', error);
+    });
+}
+
+// Ejecuta la función principal al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  checkIdentityAndLoadData(); // Ejecutar la función principal
+  // Actualizar el saldo cada 30 segundos (30000 milisegundos)
+  setInterval(updateSaldo, 300);
+});
 
 // Funciones para mostrar y ocultar los modales
 function showLogin() {
