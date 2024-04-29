@@ -31,7 +31,6 @@ h1 {
 .cards-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
     margin-top: 20px;
 }
 
