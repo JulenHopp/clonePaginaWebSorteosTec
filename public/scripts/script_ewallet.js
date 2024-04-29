@@ -144,7 +144,8 @@ function checarFecha(event) {
 function depositarSaldo(event) {
     console.log("entro a depositar");
     var cantidad = event.target.querySelector('#cantidad').value;
-    var metodo = event.target.querySelector('#metodo').value;
+    var metodoT = event.target.querySelector('#metodo').value;
+    var metodo = metodoT.split(" ")[0];
     depositar(cantidad, metodo);
 }
 
