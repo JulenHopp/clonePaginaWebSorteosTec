@@ -41,3 +41,7 @@ function openBuscaBorrego(dineroIncial, numeroMinas) {
 }
 
 
+function openBorregoTower(){
+    const features = "width=1440,height=810,left=200,top=200,menubar=no,toolbar=no,location=no,status=no,resizable=yes";
+    window.open(`/BorregoTower/index.html`, 'BorregoTower', features);
+};
