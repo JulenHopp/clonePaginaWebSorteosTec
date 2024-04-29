@@ -399,6 +399,6 @@ function hideUserOptions() {
   document.getElementById('user-options-modal').style.display = 'none';  // Oculta el modal de opciones del usuario
 }
 
-function showAdminPage() {
+function showAdminPanel() {
   window.location.href = '/html/admin.html';
 }
