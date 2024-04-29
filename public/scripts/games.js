@@ -1,3 +1,13 @@
+//pasar nombre y apellido
+fetch('/userData')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('nombre').textContent = data[0].nombre;
+        document.getElementById('apellido').textContent = data[0].apellido;
+        console.log('Datos del usuario:', data);
+    })
+    .catch(error => console.error('Error al obtener los datos del usuario:', error));
+
 function openBuscaBorrego(dineroIncial, numeroMinas) {
     // Preparar los datos a enviar en la solicitud POST
     const postData = {
