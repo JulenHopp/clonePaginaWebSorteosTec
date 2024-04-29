@@ -373,8 +373,40 @@ app.post('/borregoTower/ingresarGanancia', (req, res) => {
 ///////////////////////////
 // APIS BORREGO JUMP /////
 ///////////////////////////
+let dinero_inicial_borregoRun = 10;
+const id_borregoRun = 3;
 
-///////////////////////////
+app.post('/borregoRun/registrarCompraJuego', (req, res) => {
+  console.log("Entro a registrarCompraJuego");
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey, dinero_inicial_borregoRun, id_borregoRun], (error, results, fields) => {
+    if (error) {
+      console.error('Error en la base de datos:', error);
+      return res.status(500).send('Error al procesar la compra del juego');
+    }
+    res.send('Compra registrada correctamente');
+  });
+});
+
+app.post('/borregoRun/ingresarGanancia', (req, res) => {
+  console.log("Entro a ingresarGanancia");
+  const { cantidad } = req.body;
+  
+  if (!cantidad) {
+      return res.status(400).send('La cantidad es necesaria para procesar la transacción.');
+  }
+
+  const sql = 'CALL Registrar_compra_juegos(?, ?, ?)';
+  connection.query(sql, [identityKey,  -1 * cantidad, id_borregoRun], (error, results, fields) => {
+      if (error) {
+          console.error('Error al ejecutar el procedimiento almacenado:', error);
+          return res.status(500).send('Error interno del servidor');
+      }
+      res.send('Transacción registrada correctamente');
+  });
+});
+
+
 // COSAS DEL SERVIDOR /////
 ///////////////////////////
 
