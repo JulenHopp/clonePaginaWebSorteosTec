@@ -223,14 +223,12 @@
                  <iframe width="800" height="600" src="https://lookerstudio.google.com/embed/reporting/10ddccc4-4595-4a97-954a-a511a96548d8/page/icWxD" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>        <section class="activity">
     
             </section>
-            <section class="activity">
-                <h2>Activity</h2>
-                <ul>
-                    <li>User registration</li>
-                    <li>Game generateed $$</li>
-                    <li>Payment processed</li>
-                    <li>...</li>
-                </ul>
+            <section class="adminize">
+                <h2>Upgrade existing account to admin status.</h2>
+                <form onsubmit="upgradeToAdmin(event)">
+                    <label for="admin-email">Email:</label>
+                    <input type="email" id="admin-email" required>
+                    <button type="submit">Upgrade</button>
             </section>
         </main>
 
@@ -238,6 +236,7 @@
     <footer>
         <p>&copy; Dashboard Mockup</p>
         <script src="../scripts/script.js"></script>
+        <script src="../scripts/admin.js"></script>
     </footer>
 </body>
 </html>
