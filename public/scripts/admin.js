@@ -1,10 +1,12 @@
 //fetch makeAdmin
 function upgradeAdmin(event) {
     const email = event.target.querySelector('#admin-email').value;
+    console.log("1");
     upgradeAdminFetch(email);
 }
 
 function upgradeAdminFetch(email) {
+    console.log("2");
     const data = {
         email: email
     };
@@ -14,7 +16,7 @@ function upgradeAdminFetch(email) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(data)
     })
 
         .then(response => {
