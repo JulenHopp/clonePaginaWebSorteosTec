@@ -255,11 +255,48 @@ function openUserProfile() {
 }
 
 function editAccount() {
-  // Esta función podría redirigir al usuario a una página de edición de perfil o mostrar un formulario de edición en un modal
-  console.log('Editar cuenta');
   // Por ejemplo, puedes abrir otro modal para editar la cuenta:
   document.getElementById('edit-account-modal').style.display = 'block';
   hideUserOptions();  // Opcional: ocultar el modal de opciones del usuario
+}
+
+function updateAccount(event) {
+  event.preventDefault();
+
+  // Obtener los valores del formulario y convertir cadenas vacías en null
+  const firstName = document.getElementById('edit-first-name').value || null;
+  const lastName = document.getElementById('edit-last-name').value || null;
+  const email = document.getElementById('edit-email').value || null;
+  const password = document.getElementById('edit-password').value ? document.getElementById('edit-password').value : null;
+  const stateId = document.getElementById('edit-state').value || null;
+
+  // Datos a enviar
+  const data = { firstName, lastName, email, password, stateId };
+
+  // Enviar los datos al servidor
+  fetch('/api/updateAccount', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    alert('Cuenta actualizada con éxito');
+    // Actualizar sessionStorage o acciones adicionales
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    alert('Error al actualizar la cuenta');
+  });
+}
+
+
+
+function hideEditAccount() {
+  document.getElementById('edit-account-modal').style.display = 'none';
 }
 
 function logout() {

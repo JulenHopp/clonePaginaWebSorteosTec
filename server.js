@@ -208,18 +208,30 @@ app.post('/insertarMetodoPago', (req, res) => {
 });
 
 
-// Endpoint POST para editar una cuenta
-app.post('/editar-cuenta', (req, res) => {
-  const { viejo_email, nuevo_nombre, nuevo_apellido, nuevo_email, nueva_psswrd, nuevo_id_estado } = req.body;
+// Ruta para actualizar la cuenta del usuario
+app.post('/api/updateAccount', (req, res) => {
+  let {firstName, lastName, email, password, stateId } = req.body;
 
-  connection.query('CALL Editar_cuenta(?, ?, ?, ?, ?, ?)', [viejo_email, nuevo_nombre, nuevo_apellido, nuevo_email, nueva_psswrd, nuevo_id_estado], (error, results, fields) => {
-    if (error) {
-      console.error('Error al ejecutar el procedimiento almacenado:', error);
-      return res.status(500).json({ error: 'Error interno del servidor' });
+  if (!identityKey) {
+    return res.status(400).send({ error: 'El email antiguo es necesario para la actualización.' });
+  }
+  console.log(email, identityKey, firstName, lastName, password, stateId);
+
+  if(!email){
+    email = identityKey;
+  }
+
+  connection.query(
+    'CALL Editar_cuenta(?,?,?,?,?,?)',
+    [identityKey, firstName, lastName, email, password, stateId],
+    (error, results) => {
+      if (error) {
+        console.error('Error al ejecutar el procedimiento almacenado:', error);
+        return res.status(500).send({ error: 'Error al actualizar la cuenta' });
+      }
+      res.send({ message: 'Cuenta actualizada correctamente', results });
     }
-    console.log('Cuenta editada exitosamente');
-    res.status(200).json({ message: 'Cuenta editada exitosamente' });
-  });
+  );
 });
 
 // Endpoint POST para registrar una transacción real
