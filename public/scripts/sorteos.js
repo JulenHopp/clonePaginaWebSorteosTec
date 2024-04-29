@@ -1,6 +1,6 @@
 function accionBoleto(numeroBoleto) {
     const postData = {
-        id_cupon: numeroBoleto
+        cupon_id: numeroBoleto
     };
 
     const fetchOptions = {
@@ -14,7 +14,7 @@ function accionBoleto(numeroBoleto) {
     fetch('/registrar-compra-cupones', fetchOptions)
         .then(response => {
             if (!response.ok) {
-                throw new Error('La solicitud falló con el estado: ' + response.statusText);
+                throw new Error('Saldo insuficiente');
             }
             return response.json();  // Sólo intenta parsear como JSON si la respuesta fue exitosa
         })
