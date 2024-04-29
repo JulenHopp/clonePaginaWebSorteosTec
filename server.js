@@ -238,9 +238,9 @@ app.post('/registrar-transaccion-real', (req, res) => {
 
 // Endpoint POST para registrar una compra de cupones
 app.post('/registrar-compra-cupones', (req, res) => {
-  const { usuario_email, id_cupon } = req.body;
+  const { usuario_email, cupon_id } = req.body;
 
-  connection.query('CALL Registrar_compra_cupones(?, ?)', [identityKey, id_cupon], (error, results, fields) => {
+  connection.query('CALL Registrar_compra_cupones(?, ?)', [identityKey, cupon_id], (error, results, fields) => {
     if (error) {
       console.error('Error al ejecutar el procedimiento almacenado:', error);
       return res.status(500).json({ error: 'Error interno del servidor' });
