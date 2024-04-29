@@ -407,19 +407,8 @@ app.post('/borregoRun/ingresarGanancia', (req, res) => {
 
 app.post('/makeAdmin', (req, res) => {
   const { email } = req.body;
-  const query = 'SELECT * FROM Usuario WHERE email = ?';
-  connection.query(query, [email], (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).send('Error interno del servidor');
-      return;
-    }
-    if (results.length === 0) {
-      return res.status(404).send('Usuario no encontrado');
-    }
-    const id_usuario = results[0].id_usuario;
-    const updateQuery = 'UPDATE Usuario SET admins = 1 WHERE id_usuario = ?';
-    connection.query(updateQuery, [id_usuario], (error, results) => {
+  const query = 'UPDATE Usuario SET admins = 1 WHERE email = ?';
+    connection.query(query, [identityKey], (error, results) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).send('Error interno del servidor');
@@ -428,8 +417,7 @@ app.post('/makeAdmin', (req, res) => {
       res.status(200).send('Usuario actualizado a administrador');
     });
   });
-}
-);
+
 
 // COSAS DEL SERVIDOR /////
 ///////////////////////////

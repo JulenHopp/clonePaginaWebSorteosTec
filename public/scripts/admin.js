@@ -1,5 +1,5 @@
 //fetch makeAdmin
-function makeAdmin(event) {
+function upgradeAdmin(event) {
     event.preventDefault();
     const email = event.target.querySelector('#admin-email').value;
     const postData = {
@@ -12,6 +12,7 @@ function makeAdmin(event) {
         },
         body: JSON.stringify(postData)
     };
+
     fetch('/makeAdmin', fetchOptions)
         .then(response => {
             if (!response.ok) {
