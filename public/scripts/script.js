@@ -139,7 +139,7 @@ function checkIdentityAndLoadData() {
 // Ejecuta la función principal al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
   checkIdentityAndLoadData(); // Ejecutar la función principal
-  // Actualizar el saldo cada 30 segundos (30000 milisegundos)
+  // Actualizar el saldo cada 3 segundos (3000 milisegundos)
   setInterval(updateSaldo, 300);
 });
 
@@ -395,7 +395,10 @@ function logout() {
 }
 
 
-
 function hideUserOptions() {
   document.getElementById('user-options-modal').style.display = 'none';  // Oculta el modal de opciones del usuario
+}
+
+function showAdminPage() {
+  window.location.href = '/html/admin.html';
 }
