@@ -8,10 +8,38 @@ fetch('/userData')
     })
     .catch(error => console.error('Error al obtener los datos del usuario:', error));
 
-function openBuscaBorrego(dineroIncial, numeroMinas) {
+
+function verificarSaldoYAbrirJuegoBuscaBorrego(dineroInicial, numeroMinas) {
+    fetch('/saldo', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener el saldo');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.saldo >= dineroInicial) {
+            openBuscaBorrego(dineroInicial, numeroMinas);
+        } else {
+            alert('Saldo insuficiente para iniciar el juego. Necesitas al menos ' + dineroInicial + ' unidades.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al verificar el saldo:', error);
+        alert('Error al verificar el saldo: ' + error.message);
+    });
+}
+
+
+function openBuscaBorrego(dineroInicial, numeroMinas) {
     // Preparar los datos a enviar en la solicitud POST
     const postData = {
-        dinero: dineroIncial,
+        dinero: dineroInicial,
         minas: numeroMinas
     };
 
@@ -39,6 +67,7 @@ function openBuscaBorrego(dineroIncial, numeroMinas) {
         console.error('Error during fetch:', error);
     });
 }
+
 
 
 function openBorregoTower(){
