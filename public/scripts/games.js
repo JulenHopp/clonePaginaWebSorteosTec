@@ -133,3 +133,12 @@ function openBorregoRun(){
     const features = "width=1440,height=810,left=200,top=200,menubar=no,toolbar=no,location=no,status=no,resizable=yes";
     window.open(`/BorregoRun/index.html`, 'BorregoTower', features);
 };
+
+function openSentModalAndDeleteInput() {
+    document.getElementById('sentModal').style.display = 'block';
+    document.getElementById('friend_email').value = '';
+}
+
+function closeSentModal() {
+    document.getElementById('sentModal').style.display = 'none';
+}
