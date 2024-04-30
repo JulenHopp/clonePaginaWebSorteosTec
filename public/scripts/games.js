@@ -69,8 +69,67 @@ function openBuscaBorrego(dineroInicial, numeroMinas) {
 }
 
 
+function verificarSaldoYAbrirJuegoBorregoTower(dineroInicial) {
+    fetch('/saldo', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener el saldo');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.saldo >= dineroInicial) {
+            openBorregoTower();
+        } else {
+            alert('Saldo insuficiente para iniciar el juego. Necesitas al menos ' + dineroInicial + ' unidades.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al verificar el saldo:', error);
+        alert('Error al verificar el saldo: ' + error.message);
+    });
+}
+
 
 function openBorregoTower(){
     const features = "width=1440,height=810,left=200,top=200,menubar=no,toolbar=no,location=no,status=no,resizable=yes";
     window.open(`/BorregoTower/index.html`, 'BorregoTower', features);
+};
+
+
+function verificarSaldoYAbrirJuegoBorregoRun(dineroInicial) {
+    fetch('/saldo', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener el saldo');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.saldo >= dineroInicial) {
+            openBorregoRun();
+        } else {
+            alert('Saldo insuficiente para iniciar el juego. Necesitas al menos ' + dineroInicial + ' unidades.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al verificar el saldo:', error);
+        alert('Error al verificar el saldo: ' + error.message);
+    });
+}
+
+
+function openBorregoRun(){
+    const features = "width=1440,height=810,left=200,top=200,menubar=no,toolbar=no,location=no,status=no,resizable=yes";
+    window.open(`/BorregoRun/index.html`, 'BorregoTower', features);
 };
