@@ -405,18 +405,27 @@ app.post('/borregoRun/ingresarGanancia', (req, res) => {
   });
 });
 
-
-app.post('/makeAdmin', (req, res) => {
+// Endpoint para hacer a un usuario admin
+app.post('/make-admin', (req, res) => {
   const { email } = req.body;
-  const query = 'UPDATE Usuario SET admins = 1 WHERE email = ?';
-  connection.query(query, [email], (error, results) => {
-    if (error) {
-      console.error('Error al ejecutar la consulta:', error);
-      res.status(500).json({ error: 'Internal server error' });
-      return;
-    }
-    res.status(200).json({ message: 'User updated to admin' });
-  });
+  console.log("Email recibido:", email);  // Agregar para depuración
+
+  if (!email) {
+    console.error("Error: Email no proporcionado");
+    return res.status(400).send({ error: 'El email es necesario para la operación.' });
+  }
+
+  connection.query(
+      'CALL HacerAdmin(?)',
+      [email],
+      (error, results) => {
+          if (error) {
+              console.error('Error al ejecutar el procedimiento almacenado:', error);
+              return res.status(500).send({ error: 'Error al hacer admin al usuario' });
+          }
+          res.send({ message: 'Usuario actualizado a admin correctamente', results });
+      }
+  );
 });
 
 // COSAS DEL SERVIDOR /////
