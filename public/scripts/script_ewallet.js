@@ -39,6 +39,8 @@ document.getElementById("depositButton").addEventListener("click", openDepositMo
 document.getElementById("addPaymentButton").addEventListener("click", openPaymentModal);
 // Event listener for the "Ver Métodos de Pago" button
 document.getElementById("viewPaymentButton").addEventListener("click", openViewPaymentModal);
+// Event listener for the "Ver Boletos Comprados" button in the modal window
+document.getElementById("viewCuponsButton").addEventListener("click", openViewCuponsModal);
 
 // Function to handle opening the modal window
 function openDepositModal() {
@@ -80,6 +82,20 @@ function openViewPaymentModal() {
         }
     }
     mostrarMetodos();
+}
+
+function openViewCuponsModal() {
+    var modal = document.getElementById("viewCuponsModal");
+    modal.style.display = "block";
+
+    // Close the modal when the close button or outside the modal is clicked
+    var closeButton = document.getElementsByClassName("close")[3];
+    window.onclick = function(event) {
+        if (event.target == modal || event.target == closeButton) {
+            modal.style.display = "none";
+        }
+    }
+    cuponesComprados();
 }
 
 function insertarYChecar(event) {
@@ -181,8 +197,13 @@ function mostrarMetodos() {
     .then(response => response.json())
     .then(data => {
         const tabla = document.getElementById('tablaMetodos');
+        const tbody = tabla.querySelector('tbody');
+
+        // Clear existing table content
+        tbody.innerHTML = '';
+
         data.forEach(metodo => {
-            var row = tabla.insertRow(-1);
+            var row = tbody.insertRow(-1);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             cell1.innerHTML = metodo.nombre;
@@ -191,3 +212,27 @@ function mostrarMetodos() {
     })
     .catch(error => console.error('Error al obtener los métodos de pago:', error));
 }
+
+function cuponesComprados() {
+    fetch('/Verificar-compra-cupones')
+    .then(response => response.json())
+    .then(data => {
+        const tabla = document.getElementById('tablaCupones');
+        const tbody = tabla.querySelector('tbody');
+
+        // Clear existing table body content
+        tbody.innerHTML = '';
+
+        data.forEach(temp_cupones => {
+            var row = tbody.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = temp_cupones.id_compra;
+            cell2.innerHTML = temp_cupones.nombre;
+            cell3.innerHTML = temp_cupones.costo;
+        });
+    })
+    .catch(error => console.error('Error al obtener los cupones comprados:', error));
+}
+

@@ -428,6 +428,18 @@ app.post('/make-admin', (req, res) => {
   );
 });
 
+
+app.get('/Verificar-compra-cupones', (req, res) => {
+  connection.query('CALL Verificar_compra_cupones(?)', [identityKey], (error, results) => {
+    if (error) {
+      console.error('Error al ejecutar la consulta:', error);
+      res.status(500).send('Error interno del servidor');
+      return;
+    }
+    res.json(results[0]);
+  });
+});
+
 // COSAS DEL SERVIDOR /////
 ///////////////////////////
 

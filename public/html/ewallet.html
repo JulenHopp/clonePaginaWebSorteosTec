@@ -212,6 +212,7 @@
         <button id="depositButton" class="styled-button">Depositar a la e-Wallet</button>
         <button id="viewPaymentButton" class="styled-button">Ver Métodos de Pago</button>
         <button id="addPaymentButton" class="styled-button">Añadir Método de Pago</button>
+        <button id="viewCuponsButton" class="styled-button">Ver Boletos Comprados</button>
         <!-- Modal window -->
         <div id="myModal" class="modal">
             <div class="modal-content">
@@ -286,10 +287,32 @@
                 <span class="close">&times;</span>
                 <h2>Métodos de Pago</h2>
                 <table id="tablaMetodos">
+                    <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Número</th>
                     </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         <!-- Modal Window for viewing your purchased Cupons -->
+        <div id="viewCuponsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Boletos Comprados</h2>
+                <table id="tablaCupones">
+                    <thead>
+                    <tr>
+                        <th class="id-column">Id Compra</th>
+                        <th class="nombre-column">Nombre Boleto</th>
+                        <th class="precio-column">Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>

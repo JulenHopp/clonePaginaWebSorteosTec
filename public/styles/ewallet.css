@@ -138,3 +138,25 @@ label {
     font-weight: bold;
 
 }
+
+table {
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left; /* Align text to the left */
+  }
+
+  .id-column {
+    width: 100px;
+  }
+
+  .nombre-column {
+    width: 200px;
+  }
+
+  .precio-column {
+    width: 100px;
+  }
