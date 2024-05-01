@@ -99,7 +99,6 @@ function openViewCuponsModal() {
 }
 
 function insertarYChecar(event) {
-    insertarMetodoDatos(event);
     checarFecha(event);
 }
 
@@ -147,6 +146,7 @@ function insertarMetodo(nombre, numero_tarjeta) {
 }
 
 function checarFecha(event) {
+    console.log("entro a checar fecha");
     var mes = event.target.querySelector('#mes').value;
     var anio = event.target.querySelector('#anio').value;
     var today = new Date();
@@ -154,6 +154,10 @@ function checarFecha(event) {
     if (today > expiry) {
         alert("La tarjeta ha expirado");
         return;
+    }
+    else{
+        insertarMetodoDatos(event);
+    
     }
 }
 // Función para guardar depositos
@@ -236,3 +240,6 @@ function cuponesComprados() {
     .catch(error => console.error('Error al obtener los cupones comprados:', error));
 }
 
+//falta vencimiento arreglaru bug y que puedas poner dos metodos de pago del mismo tipo
+// busca borrego facil sale mnesaje de error t quitaron 10 puntos y t cobra 10º
+// borra invite a friend
