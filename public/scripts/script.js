@@ -138,39 +138,40 @@ function login(event) {
 
 // Función para enviar solicitud de autenticación al servidor
 function autenticarUsuario(email, password) {
-const userCredentials = {
-  "email": email,
-  "password": password
-};
+  const userCredentials = {
+    "email": email,
+    "password": password
+  };
 
-fetch('/authenticate', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(userCredentials)
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error('Error en la autenticación');
-  }
-  return response.json();
-})
-.then(data => {
-  console.log('Autenticación exitosa:', data);
-  checkIdentityAndLoadData();
-  if (data.admins == 1) {
-    userData.admin = true;
-    document.getElementById('admin-modal').style.display = 'block';
+  fetch('/authenticate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userCredentials)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Credenciales incorrectas');  // Cambio en el mensaje de error
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Autenticación exitosa:', data);
+    checkIdentityAndLoadData();
+    if (data.admins == 1) {
+      userData.admin = true;
+      document.getElementById('admin-modal').style.display = 'block';
+      hideLogin();  // Cierra el modal de inicio de sesión
+    }
     hideLogin();  // Cierra el modal de inicio de sesión
-    //createAdminButton();
-  }
-  hideLogin();  // Cierra el modal de inicio de sesión
-})
-.catch(error => {
-  console.error('Error al autenticar:', error);
-});
+  })
+  .catch(error => {
+    console.error('Error al autenticar:', error);
+    alert('Usuario o contraseña incorrectos.');  // Muestra un pop-up de alerta
+  });
 }
+
 
 function hideAdmin() {
   document.getElementById('admin-modal').style.display = 'none';
