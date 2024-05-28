@@ -17,4 +17,5 @@ Proyecto que integra la plataforma Sorteos Tec con nuevos juegos elaborados en U
 ![image](https://github.com/JulenHopp/clonePaginaWebSorteosTec/assets/122712372/66f4cefe-b2d3-45b5-b458-845d4f5b1a09)
 
 Herramientas utilizadas: Unity, servidor mySQL en Aiven, Node.js, Looker, HTML, CSS Y Javascript.
+
 Video funcionalidad: https://www.youtube.com/watch?v=iaOVPcZ30gI&embeds_widget_referrer=https%3A%2F%2Fdocs.google.com%2Fpresentation%2Fd%2F1_rHkmZ_5eDZ94RkqpMbXqkTiTUdPyS3RPeUuHfB7ziQ%2Fedit&embeds_referring_euri=https%3A%2F%2Fdocs.google.com%2F&embeds_referring_origin=https%3A%2F%2Fdocs.google.com&source_ve_path=MjM4NTE&feature=emb_title
